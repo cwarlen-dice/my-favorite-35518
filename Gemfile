@@ -40,13 +40,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'better_errors' # エラー画面をわかりやすく整形してくれる
   gem 'binding_of_caller' # better_errorsの画面上にirb/pry(PERL)を表示する
-  gem 'rubocop', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-end
-
-group :production do
-  gem 'unicorn', '5.4.1'
 end
 
 group :test do
@@ -60,7 +55,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-gem 'active_hash'
-gem 'aws-sdk-s3', require: false
-gem 'devise'
 gem 'pry-byebug' # デバック関連
