@@ -56,6 +56,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
+gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'active_hash'
 gem 'aws-sdk-s3', require: false
 gem 'devise'
