@@ -38,6 +38,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'annotate'
   gem 'better_errors' # エラー画面をわかりやすく整形してくれる
   gem 'binding_of_caller' # better_errorsの画面上にirb/pry(PERL)を表示する
   gem 'rubocop', require: false

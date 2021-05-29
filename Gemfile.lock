@@ -74,6 +74,9 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    annotate (3.1.1)
+      activerecord (>= 3.2, < 7.0)
+      rake (>= 10.4, < 14.0)
     arbre (1.4.0)
       activesupport (>= 3.0.0, < 6.2)
       ruby2_keywords (>= 0.0.2, < 1.0)
@@ -318,6 +321,7 @@ PLATFORMS
 DEPENDENCIES
   active_hash
   activeadmin!
+  annotate
   aws-sdk-s3
   better_errors
   binding_of_caller
