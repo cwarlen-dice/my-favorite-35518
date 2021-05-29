@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: my_favorite_35518_production
-  username: my_favorite_35518
-  password: <%= ENV['MY_FAVORITE_35518_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
