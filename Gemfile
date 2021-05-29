@@ -61,3 +61,4 @@ gem 'active_hash'
 gem 'aws-sdk-s3', require: false
 gem 'devise'
 gem 'pry-byebug' # デバック関連
+gem 'pry-rails' # デバック関連
