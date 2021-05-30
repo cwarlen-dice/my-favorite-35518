@@ -61,6 +61,8 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'active_hash'
 gem 'aws-sdk-s3', require: false
 gem 'devise'
+gem 'image_processing', '~> 1.2' # 画像関連
 gem 'impressionist' # PVカウンター
+gem 'mini_magick' # 画像関連
 gem 'pry-byebug' # デバック関連
 gem 'pry-rails' # デバック関連
