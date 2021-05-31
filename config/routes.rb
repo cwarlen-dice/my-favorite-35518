@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'users/show'
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
-  root to: 'test#index'
+  # root to: 'test#index'
   resources :users, only: %i[show]
 
   # # ログイン、アカウント編集後、任意のページに推移させるための記述
@@ -16,7 +16,7 @@ end
 # == Route Map
 #
 #                                Prefix Verb       URI Pattern                                                                              Controller#Action
-#                             user_show GET        /user/show(.:format)                                                                     user#show
+#                            users_show GET        /users/show(.:format)                                                                    users#show
 #                      new_user_session GET        /users/sign_in(.:format)                                                                 devise/sessions#new
 #                          user_session POST       /users/sign_in(.:format)                                                                 devise/sessions#create
 #                  destroy_user_session DELETE     /users/sign_out(.:format)                                                                devise/sessions#destroy
@@ -41,7 +41,7 @@ end
 #                                       PUT        /admin/password(.:format)                                                                active_admin/devise/passwords#update
 #                                       POST       /admin/password(.:format)                                                                active_admin/devise/passwords#create
 #                                  root GET        /                                                                                        test#index
-#                            user_index GET        /user(.:format)                                                                          user#index
+#                                  user GET        /users/:id(.:format)                                                                     users#show
 #                            admin_root GET        /admin(.:format)                                                                         admin/dashboard#index
 #        batch_action_admin_admin_users POST       /admin/admin_users/batch_action(.:format)                                                admin/admin_users#batch_action
 #                     admin_admin_users GET        /admin/admin_users(.:format)                                                             admin/admin_users#index
