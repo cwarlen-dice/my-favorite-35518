@@ -1,9 +1,0 @@
-<p>このページは仮のトップページです。</p>
-
-<%# ここに追加する %>
-<%= link_to "登録", new_user_registration_path, class: "btn btn-primary" %>
-
-<%= form_with(model: [@user], method: :post, local: true) do |form| %>
-
-  <%= form.submit "submit" %>
-<% end %>

@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
     user_path(resource.id)
   end
 
-  # AdminUserに登録がなければ以下を登録
-  AdminUser.create!(email: 'admin@example.com', password: 'Password', password_confirmation: 'Password') if AdminUser.all.blank?
+  # # AdminUserに登録がなければ以下を登録
+  # AdminUser.create!(email: 'admin@example.com', password: 'Password', password_confirmation: 'Password') if AdminUser.all.blank?
 
   private
 
