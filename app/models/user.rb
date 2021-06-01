@@ -28,6 +28,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :nickname, uniqueness: true
+
   is_impressionable counter_cache: true
 
   # 登録時に email を不要にする

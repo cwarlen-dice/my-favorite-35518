@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 2021_05_30_060619) do
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: ""
     t.string "encrypted_password", default: "", null: false
-    t.string "nickname", default: "", null: false
+    t.string "nickname", null: false
     t.date "birthday"
     t.string "blood_type_id"
     t.text "prorile"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2021_05_30_060619) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_users_on_email"
+    t.index ["nickname"], name: "index_users_on_nickname", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
