@@ -1,8 +1,9 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :password_confirmation, :impressions_count
+  permit_params :nickname, :password, :password_confirmation, :impressions_count, :email
 
   form do |f|
     f.inputs do
+      f.input :nickname
       f.input :email
       f.input :password
       f.input :password_confirmation
