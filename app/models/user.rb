@@ -30,7 +30,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :nickname, uniqueness: true
+  validates :nickname, uniqueness: { case_sensitive: true }, presence: true
+  validates :password, format: { with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]+\z/ }, allow_blank: true
 
   is_impressionable counter_cache: true
 
