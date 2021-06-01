@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   root to: 'items#index'
   resources :items, only: %i[index]
-  resources :users, only: %i[show]
+  resources :users, only: %i[show edit update]
   ActiveAdmin.routes(self)
 end
 
@@ -36,7 +36,10 @@ end
 #                                       POST       /admin/password(.:format)                                                                active_admin/devise/passwords#create
 #                                  root GET        /                                                                                        items#index
 #                                 items GET        /items(.:format)                                                                         items#index
+#                             edit_user GET        /users/:id/edit(.:format)                                                                users#edit
 #                                  user GET        /users/:id(.:format)                                                                     users#show
+#                                       PATCH      /users/:id(.:format)                                                                     users#update
+#                                       PUT        /users/:id(.:format)                                                                     users#update
 #                            admin_root GET        /admin(.:format)                                                                         admin/dashboard#index
 #        batch_action_admin_admin_users POST       /admin/admin_users/batch_action(.:format)                                                admin/admin_users#batch_action
 #                     admin_admin_users GET        /admin/admin_users(.:format)                                                             admin/admin_users#index

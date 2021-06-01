@@ -1,0 +1,23 @@
+<%= render "shared/header" %>
+
+<h1>Users#edit</h1>
+<%= form_with(model: @user, url: user_path(@user.id), local: true) do |f| %>
+  <%= f.label :birthday %><br />
+  <%= raw sprintf(
+            f.date_select(
+              :birthday,
+              use_month_numbers: true,
+              prompt:'--',
+              start_year: (Time.now.year - 5),
+              end_year: 1930,
+              date_separator: '%s'),
+            "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
+
+  <%= f.label :blood_type %><br />
+  <%= f.text_field :blood_type_id %><br />
+  <%= f.label :prorile %><br />
+  <%= f.text_area :prorile %><br />
+  <%= f.label :image %><br />
+  <%= f.file_field :image, accept: 'image/jpg,image/jpeg,image/png' %><br />
+  <%= f.submit "更新" %>
+<% end %>
