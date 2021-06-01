@@ -2,12 +2,9 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :basic_auth
 
-  def after_sign_in_path_for(resource)
-    user_path(resource.id)
-  end
-
   # # AdminUserに登録がなければ以下を登録
   # AdminUser.create!(email: 'admin@example.com', password: 'Password', password_confirmation: 'Password') if AdminUser.all.blank?
+  # AdminUser.create!(email: 'a@a', password: 'Password', password_confirmation: 'Password') if AdminUser.all.blank?
 
   private
 
