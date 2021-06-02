@@ -1,15 +1,22 @@
 <%= render "shared/header" %>
 
-<h1>Users#show</h1>
-<%= link_to(:プロフィール表示, '#プロフィール表示', id: "edit-btn") %>
-<div id="prorile" style="display: none;">
-  <%= "誕生日：#{@user.birthday}" %><br />
-  <%= "血液型：#{@user.blood_type[:data]}" %><br />
-  <%= "プロフィール：#{@user.prorile}" %><br />
-  <% if @user.image.attached? %>
-    <%#= image_tag @user.image %>
+  <%= link_to(:プロフィール表示, '#プロフィール表示', id: "edit-btn") %>
+  <div id="prorile" style="display: none;">
+    <%= "誕生日：#{@user.birthday}" %><br />
+    <%= "血液型：#{@user.blood_type[:data]}" unless @user.blood_type.blank? %><br />
+    <%= "プロフィール：#{@user.prorile}" %><br />
+    <% if @user.image.attached? %>
+      <%#= image_tag @user.image %>
+    <% end %>
+    <%= link_to(:編集, edit_user_path(@user.id))  %>
+  </div><br />
+  <%= link_to(:投稿, new_user_item_path(@user.id)) %>
+  <%= "PV数：#{@user.impressions_count }"%>
+  投稿一覧
+  <% @user.items.each do |item| %>
+    <div class="image_tag">
+      <%= image_tag item.image %>
+      <%= item.name %>
+      <%= item.comment %>
+    </div>
   <% end %>
-  <%= link_to(:編集, edit_user_path(@user.id))  %>
-</div><br />
-<%= "PV数：#{@user.impressions_count }"%>
-<p>Find me in app/views/users/show.html.erb</p>

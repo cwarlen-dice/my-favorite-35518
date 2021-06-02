@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_30_060619) do
+ActiveRecord::Schema.define(version: 2021_06_02_071213) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -86,12 +86,30 @@ ActiveRecord::Schema.define(version: 2021_05_30_060619) do
     t.index ["user_id"], name: "index_impressions_on_user_id"
   end
 
+  create_table "item_genre_mts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "genre_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["genre_id"], name: "index_item_genre_mts_on_genre_id"
+    t.index ["item_id"], name: "index_item_genre_mts_on_item_id"
+  end
+
+  create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: ""
     t.string "encrypted_password", default: "", null: false
     t.string "nickname", null: false
     t.date "birthday"
-    t.string "blood_type_id"
+    t.integer "blood_type_id"
     t.text "prorile"
     t.integer "impressions_count", default: 0, null: false
     t.string "reset_password_token"
@@ -104,4 +122,6 @@ ActiveRecord::Schema.define(version: 2021_05_30_060619) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "item_genre_mts", "items"
+  add_foreign_key "items", "users"
 end

@@ -14,7 +14,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    # binding.pry
     impressionist(@user) # PVカウントアップ
   end
 
@@ -25,7 +24,6 @@ class UsersController < ApplicationController
   end
 
   def admin
-    # redirect_to(admin_dashboard_path) and return if request.referer == 'http://localhost:3000/admin/login'
     redirect_to(admin_root_path) and return if request.referer.include?('admin/login')
   end
 
