@@ -14,7 +14,7 @@
             "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
 
   <%= f.label :blood_type %><br />
-  <%= f.text_field :blood_type_id %><br />
+  <%= f.collection_select(:blood_type_id, BloodType.all, :id, :data, {}, {class:"select-box", id:"item-blood_type"}) %><br />
   <%= f.label :prorile %><br />
   <%= f.text_area :prorile %><br />
   <%= f.label :image %><br />

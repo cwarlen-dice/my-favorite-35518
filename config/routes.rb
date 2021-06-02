@@ -39,7 +39,7 @@ end
 #                                  user GET        /users/:id(.:format)                                                                     users#show
 #                                       PATCH      /users/:id(.:format)                                                                     users#update
 #                                       PUT        /users/:id(.:format)                                                                     users#update
-#                            admin_root GET        /admin(.:format)                                                                         admin/dashboard#index
+#                            admin_root GET        /admin(.:format)                                                                         admin/dashboard#indexF
 #        batch_action_admin_admin_users POST       /admin/admin_users/batch_action(.:format)                                                admin/admin_users#batch_action
 #                     admin_admin_users GET        /admin/admin_users(.:format)                                                             admin/admin_users#index
 #                                       POST       /admin/admin_users(.:format)                                                             admin/admin_users#create
