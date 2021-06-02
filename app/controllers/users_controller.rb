@@ -1,15 +1,11 @@
 class UsersController < ApplicationController
-  # def index
-  #   @user = User.find(params[:format])
-  #   impressionist(@user) # PVカウントアップ
-  # end
+  before_action :admin
+  before_action :set_user, only: %i[edit update show]
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to(user_path(params[:id]))
     else
@@ -18,7 +14,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     # binding.pry
     impressionist(@user) # PVカウントアップ
   end
@@ -27,5 +22,13 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:birthday, :blood_type_id, :prorile, :image)
+  end
+
+  def admin
+    redirect_to(admin_dashboard_path) and return if request.referer == 'http://localhost:3000/admin/login'
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end
