@@ -8,7 +8,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string :encrypted_password, null: false, default: ''
       t.string :nickname, null: false, unique: true
       t.date :birthday
-      t.string :blood_type_id
+      t.integer :blood_type_id
       t.text :prorile
       t.integer :impressions_count, null: false, default: 0
 
