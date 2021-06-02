@@ -3,12 +3,13 @@
 <h1>Users#show</h1>
 <%= link_to(:プロフィール表示, '#プロフィール表示', id: "edit-btn") %>
 <div id="prorile" style="display: none;">
-  <%= @user.birthday %><br />
-  <%= @user.blood_type_id %><br />
-  <%= @user.prorile %><br />
+  <%= "誕生日：#{@user.birthday}" %><br />
+  <%= "血液型：#{@user.blood_type[:data]}" %><br />
+  <%= "プロフィール：#{@user.prorile}" %><br />
   <% if @user.image.attached? %>
-    <%#= image_tag @user.image %><br />
+    <%#= image_tag @user.image %>
   <% end %>
-</div>
-<%= @user.impressions_count %>
+  <%= link_to(:編集, edit_user_path(@user.id))  %>
+</div><br />
+<%= "PV数：#{@user.impressions_count }"%>
 <p>Find me in app/views/users/show.html.erb</p>

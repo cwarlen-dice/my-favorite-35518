@@ -27,6 +27,9 @@ class User < ApplicationRecord
 
   has_one_attached :image
 
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :blood_type
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
