@@ -25,7 +25,8 @@ class UsersController < ApplicationController
   end
 
   def admin
-    redirect_to(admin_dashboard_path) and return if request.referer == 'http://localhost:3000/admin/login'
+    # redirect_to(admin_dashboard_path) and return if request.referer == 'http://localhost:3000/admin/login'
+    redirect_to(admin_dashboard_path) and return if requeststr.include?('admin/login')
   end
 
   def set_user
