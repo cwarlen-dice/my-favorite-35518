@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  # get 'users/show'
+  root to: 'items#index'
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
-  root to: 'items#index'
   resources :items, only: %i[index]
   resources :users, only: %i[show edit update]
   ActiveAdmin.routes(self)
