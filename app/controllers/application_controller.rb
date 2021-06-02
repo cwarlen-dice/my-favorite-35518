@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
 
   # # AdminUserに登録がなければ以下を登録
   # if AdminUser.all.blank?
-  #   AdminUser.create!(email: 'a@a', nickname: 'aaa', password: 'Password',
-  #                     password_confirmation: 'Password')
+  # AdminUser.create!(email: 'a@a', nickname: 'aaa', password: 'Password',
+  #                   password_confirmation: 'Password')
   # end
 
   private
