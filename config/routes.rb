@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: 'items#index'
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
-  resources :items, only: %i[index create new]
+  resources :items, only: %i[index]
   resources :users, only: %i[show edit update] do
     resources :items, only: %i[create new show]
   end

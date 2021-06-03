@@ -4,6 +4,7 @@ class CreateItems < ActiveRecord::Migration[6.0]
       t.references :user, foreign_key: true, null: false
       t.string :name
       t.text :comment
+      t.integer :impressions_count, null: false, default: 0
       t.timestamps
     end
   end
