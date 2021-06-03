@@ -8,13 +8,13 @@
 #  encrypted_password     :string(255)      default(""), not null
 #  impressions_count      :integer          default(0), not null
 #  nickname               :string(255)      not null
-#  prorile                :text(65535)
+#  profile                :text(65535)
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  blood_type_id          :string(255)
+#  blood_type_id          :integer
 #
 # Indexes
 #
@@ -29,8 +29,7 @@ class User < ApplicationRecord
   has_many :item_genre_mts
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to_active_hash :blood_type
-  belongs_to_active_hash :genre, through: :item_genre_mts
+  belongs_to :blood_type
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

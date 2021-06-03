@@ -11,5 +11,4 @@ class Genre < ActiveHash::Base
   include ActiveHash::Associations
   has_many :item_genre_mts
   has_many :items, through: :item_genre_mts
-  has_many :users, through: :item_genre_mts
 end
