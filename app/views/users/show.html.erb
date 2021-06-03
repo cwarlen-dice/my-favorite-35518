@@ -1,6 +1,7 @@
 <%= render "shared/header" %>
 
-  <%= link_to(:プロフィール表示, '#プロフィール表示', id: "edit-btn") %>
+  <%#= link_to(:プロフィール表示, '#プロフィール表示', id: "edit-btn") %>
+  <%= link_to(:プロフィール表示, 'javascript:void(0);', { id: "edit-btn" }) %>
   <div id="profile" style="display: none;">
     <%= "誕生日：#{@user.birthday}" %><br />
     血液型：
@@ -10,10 +11,15 @@
     プロフィール画像：<br />
       <%= image_tag @user.image, class: "profile-img" if @user.image.attached? %>
     <br />
-    <%= link_to(:編集, edit_user_path(@user.id))  %>
+    <% if user_signed_in? && current_user.id == @user.id %>
+      <%= link_to(:編集, edit_user_path(@user.id))  %>
+    <% end %>
   </div><br />
 
-  <%= link_to(:投稿, new_user_item_path(@user.id)) %>
+  <% if user_signed_in? && current_user.id == @user.id %>
+    <%= link_to(:投稿, new_user_item_path(@user.id)) %><br />
+  <% end %>
+
   <%= "PV数：#{@user.impressions_count }"%>
   投稿一覧
     <%= form_with(url: '#', local: false) do |f| %>

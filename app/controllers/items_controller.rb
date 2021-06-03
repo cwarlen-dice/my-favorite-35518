@@ -1,4 +1,7 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, except: %i[index]
+  before_action :check_user, except: %i[index]
+
   def index
   end
 
@@ -16,7 +19,13 @@ class ItemsController < ApplicationController
     end
   end
 
+  private
+
   def image_genre_params
     params.require(:image_genre).permit(:name, :comment, :genre_id, :image).merge(user_id: current_user.id)
+  end
+
+  def check_user
+    redirect_to(root_path) unless current_user.id == Item.find(params[:user_id]).user_id
   end
 end
