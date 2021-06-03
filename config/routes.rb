@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   resources :items, only: %i[index create new]
   resources :users, only: %i[show edit update] do
-    resources :items, only: %i[create new]
+    resources :items, only: %i[create new show]
   end
   ActiveAdmin.routes(self)
 end

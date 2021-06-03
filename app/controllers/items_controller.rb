@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
-  before_action :check_user, except: %i[index]
+  before_action :check_user, except: %i[index show]
 
   def index
   end
@@ -19,6 +19,10 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+    @item = Item.find(params[:id])
+  end
+
   private
 
   def image_genre_params
@@ -26,6 +30,6 @@ class ItemsController < ApplicationController
   end
 
   def check_user
-    redirect_to(root_path) if !params[:user_id].nil? && !(current_user.id == params[:user_id].to_i)
+    redirect_to(root_path) and return if params[:user_id].nil? && (current_user.id != params[:user_id].to_i)
   end
 end

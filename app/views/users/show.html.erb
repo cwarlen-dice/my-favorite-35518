@@ -1,6 +1,5 @@
 <%= render "shared/header" %>
 
-  <%#= link_to(:プロフィール表示, '#プロフィール表示', id: "edit-btn") %>
   <%= link_to(:プロフィール表示, 'javascript:void(0);', { id: "edit-btn" }) %>
   <div id="profile" style="display: none;">
     <%= "誕生日：#{@user.birthday}" %><br />
@@ -32,11 +31,13 @@
         <%= Genre.data[g.genre_id][:data] %>
           <% @item_genre.each do |item_genre| %>
             <% if item_genre.genre_id == g.genre_id %>
-              <div class="image_tag">
-                <%= image_tag item_genre.item.image, class: "item-img" %>
-                <%= item_genre.item.name %>
-                <%= item_genre.item.comment %>
-              </div>
+              <%= link_to user_item_path(item_genre.item_id) do %>
+                <div class="image_tag">
+                  <%= image_tag(item_genre.item.image, class: "item-img") %>
+                  <%#= item_genre.item.name %>
+                  <%#= item_genre.item.comment %>
+                </div>
+              <% end %>
             <% end %>
           <% end %>
       </div>

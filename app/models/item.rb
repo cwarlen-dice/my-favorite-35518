@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
-  has_many :item_genre_mts
   has_one_attached :image
+  has_many :item_genre_mts
   belongs_to :user
 
   extend ActiveHash::Associations::ActiveRecordExtensions
