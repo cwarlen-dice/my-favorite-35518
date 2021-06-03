@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :admin
   before_action :authenticate_user!, except: %i[show]
-  # before_action :no_user
-  before_action :set_user, only: %i[edit update show]
+  before_action :no_user
+  before_action :set_user
   before_action :check_user, except: %i[show]
 
   def edit
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     redirect_to(root_path) and return unless current_user.id == @user.id
   end
 
-  # def no_user
-  #   redirect_to(root_path) if User.find_by(id: params[:id]).nil?
-  # end
+  def no_user
+    redirect_to(root_path) if User.find_by(id: params[:id]).nil?
+  end
 end
