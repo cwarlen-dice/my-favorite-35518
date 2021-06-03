@@ -19,11 +19,9 @@ class UsersController < ApplicationController
 
   def show
     genre_sql = "SELECT DISTINCT genre_id FROM item_genre_mts WHERE user_id=#{@user.id} ORDER BY genre_id ASC"
-    item_genre_sql = "SELECT item_id,genre_id FROM item_genre_mts WHERE user_id=#{@user.id} ORDER BY genre_id ASC"
+    item_genre_sql = "SELECT user_id,item_id,genre_id FROM item_genre_mts WHERE user_id=#{@user.id} ORDER BY genre_id ASC"
     @genre = ItemGenreMt.find_by_sql(genre_sql)
     @item_genre = ItemGenreMt.find_by_sql(item_genre_sql)
-    # @item_genre = ItemGenreMt.with_attached_images.find_by_sql(item_genre_sql)
-    # @item_genre = ItemGenreMt.includes(:item).find_by_sql(item_genre_sql)
     impressionist(@user) # PVカウントアップ
   end
 

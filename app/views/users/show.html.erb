@@ -31,11 +31,9 @@
         <%= Genre.data[g.genre_id][:data] %>
           <% @item_genre.each do |item_genre| %>
             <% if item_genre.genre_id == g.genre_id %>
-              <%= link_to user_item_path(item_genre.item_id) do %>
+              <%= link_to user_item_path(item_genre.user_id, item_genre.item_id) do %>
                 <div class="image_tag">
                   <%= image_tag(item_genre.item.image, class: "item-img") %>
-                  <%#= item_genre.item.name %>
-                  <%#= item_genre.item.comment %>
                 </div>
               <% end %>
             <% end %>
@@ -43,11 +41,3 @@
       </div>
     <% end %>
   </div>
-<%
-=begin
-%>
-
-
-<%
-=end
-%>

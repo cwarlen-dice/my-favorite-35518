@@ -5,6 +5,8 @@ class Item < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :genre, through: :item_genre_mts
+
+  is_impressionable counter_cache: true
 end
 
 # == Schema Information
