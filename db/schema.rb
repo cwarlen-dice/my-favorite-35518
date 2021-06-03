@@ -88,11 +88,13 @@ ActiveRecord::Schema.define(version: 2021_06_02_071213) do
 
   create_table "item_genre_mts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "item_id", null: false
+    t.bigint "user_id", null: false
     t.bigint "genre_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["genre_id"], name: "index_item_genre_mts_on_genre_id"
     t.index ["item_id"], name: "index_item_genre_mts_on_item_id"
+    t.index ["user_id"], name: "index_item_genre_mts_on_user_id"
   end
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -110,7 +112,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_071213) do
     t.string "nickname", null: false
     t.date "birthday"
     t.integer "blood_type_id"
-    t.text "prorile"
+    t.text "profile"
     t.integer "impressions_count", default: 0, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -123,5 +125,6 @@ ActiveRecord::Schema.define(version: 2021_06_02_071213) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "item_genre_mts", "items"
+  add_foreign_key "item_genre_mts", "users"
   add_foreign_key "items", "users"
 end

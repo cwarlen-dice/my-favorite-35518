@@ -26,10 +26,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_one_attached :image
   has_many :items
+  has_many :item_genre_mts
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :blood_type
-  belongs_to :genre
+  belongs_to_active_hash :blood_type
+  belongs_to_active_hash :genre, through: :item_genre_mts
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

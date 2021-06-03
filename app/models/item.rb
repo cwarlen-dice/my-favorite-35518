@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   belongs_to :user
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :genre, through: :item_genre_mt
+  belongs_to_active_hash :genre, through: :item_genre_mts
 end
 
 # == Schema Information

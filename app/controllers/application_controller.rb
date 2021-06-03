@@ -2,11 +2,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :basic_auth
 
-  # # AdminUserに登録がなければ以下を登録
-  # if AdminUser.all.blank?
-  # AdminUser.create!(email: 'a@a', nickname: 'aaa', password: 'Password', password_confirmation: 'Password')
-  # end
-
   private
 
   def configure_permitted_parameters
