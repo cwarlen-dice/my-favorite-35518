@@ -26,6 +26,6 @@ class ItemsController < ApplicationController
   end
 
   def check_user
-    redirect_to(root_path) unless current_user.id == Item.find(params[:user_id]).user_id
+    redirect_to(root_path) if !params[:user_id].nil? && !(current_user.id == params[:user_id].to_i)
   end
 end

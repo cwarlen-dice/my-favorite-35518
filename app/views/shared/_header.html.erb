@@ -1,6 +1,6 @@
 <header>
       <% if user_signed_in? %>
-      <li >
+      <li>
       <% unless controller.action_name == 'show' %>
         <%= link_to current_user.nickname, user_path(current_user.id) %>
       <%# elsif @user.defined? %>
