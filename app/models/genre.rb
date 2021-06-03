@@ -1,6 +1,6 @@
 class Genre < ActiveHash::Base
   self.data = [
-    { id: 0, data: '--' },
+    { id: 0, data: 'ジャンル未設定' },
     { id: 1, data: 'アニメ' },
     { id: 2, data: 'ライトノベル' },
     { id: 3, data: 'イラスト' },
@@ -11,5 +11,5 @@ class Genre < ActiveHash::Base
   include ActiveHash::Associations
   has_many :item_genre_mts
   has_many :items, through: :item_genre_mts
-  has_many :users
+  has_many :users, through: :item_genre_mts
 end

@@ -7,6 +7,6 @@ class ImageGenre
   def save
     name = image.original_filename if name.blank?
     item = Item.create(name: name, comment: comment, image: image, user_id: user_id)
-    ItemGenreMt.create(item_id: item.id, genre_id: genre_id)
+    ItemGenreMt.create(item_id: item.id, genre_id: genre_id, user_id: user_id)
   end
 end

@@ -9,7 +9,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string :nickname, null: false, unique: true
       t.date :birthday
       t.integer :blood_type_id
-      t.text :prorile
+      t.text :profile
       t.integer :impressions_count, null: false, default: 0
 
       ## Recoverable
