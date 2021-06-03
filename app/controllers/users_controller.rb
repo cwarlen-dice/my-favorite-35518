@@ -31,7 +31,9 @@ class UsersController < ApplicationController
   end
 
   def admin
-    redirect_to(admin_root_path) and return if request.referer.include?('admin/login')
+    unless request.referer.nil?
+      redirect_to(admin_root_path) and return if request.referer.include?('admin/login')
+    end
   end
 
   def set_user
