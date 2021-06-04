@@ -8,13 +8,13 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @image_genre = ImageGenre.new
+    @item_options = ItemOptions.new
   end
 
   def create
-    @image_genre = ImageGenre.new(image_genre_params)
-    if @image_genre.valid?
-      @image_genre.save
+    @item_options = ItemOptions.new(item_options_params)
+    if @item_options.valid?
+      @item_options.save
       redirect_to(user_path(current_user.id)) and return
     else
       render :new
@@ -29,8 +29,10 @@ class ItemsController < ApplicationController
 
   private
 
-  def image_genre_params
-    params.require(:image_genre).permit(:name, :comment, :genre_id, :image).merge(user_id: current_user.id)
+  def item_options_params
+    params.require(:item_options).permit(:name, :comment, :tag_name, :genre_id, :image).merge(
+      user_id: current_user.id
+    )
   end
 
   def check_user
