@@ -1,6 +1,6 @@
 <%= render "shared/header" %>
 
-<%= form_with(model: @image_genre, url: user_items_path(current_user.id), local: true) do |f| %>
+<%= form_with(model: @item_options, url: user_items_path(current_user.id), local: true) do |f| %>
   <%= f.label :image %><br />
   <%= f.file_field :image, accept: 'image/jpg,image/jpeg,image/png' %><br />
   <%= f.label :name %><br />
@@ -8,6 +8,8 @@
   <%= f.text_field :name %><br />
   <%= f.label :comment %><br />
   <%= f.text_area :comment %><br />
+  <%= f.label :tag_name %><br />
+  <%= f.text_field :tag_name %><br />
   <%= f.label :genre %><br />
   <%= f.collection_select(:genre_id, Genre.all, :id, :data, {}, {class:"select-box", id:"item-genre"}) %><br />
   <%= f.submit "投稿" %>

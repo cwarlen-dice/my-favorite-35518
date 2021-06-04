@@ -2,6 +2,8 @@ class Item < ApplicationRecord
   has_one_attached :image
   has_many :item_genre_mts
   belongs_to :user
+  has_many :item_tag_mts
+  has_many :tags, through: :item_tag_mts
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :genre, through: :item_genre_mts
