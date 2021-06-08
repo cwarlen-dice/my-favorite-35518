@@ -37,10 +37,9 @@ end
 #                                       PUT    /admin/password(.:format)                                                                active_admin/devise/passwords#update
 #                                       POST   /admin/password(.:format)                                                                active_admin/devise/passwords#create
 #                                 items GET    /items(.:format)                                                                         items#index
-#                                       POST   /items(.:format)                                                                         items#create
-#                              new_item GET    /items/new(.:format)                                                                     items#new
 #                            user_items POST   /users/:user_id/items(.:format)                                                          items#create
 #                         new_user_item GET    /users/:user_id/items/new(.:format)                                                      items#new
+#                             user_item GET    /users/:user_id/items/:id(.:format)                                                      items#show
 #                             edit_user GET    /users/:id/edit(.:format)                                                                users#edit
 #                                  user GET    /users/:id(.:format)                                                                     users#show
 #                                       PATCH  /users/:id(.:format)                                                                     users#update

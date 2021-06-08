@@ -69,4 +69,5 @@ gem 'impressionist' # PVカウンター
 gem 'mini_magick' # 画像関連
 gem 'pry-byebug' # デバック関連
 gem 'pry-rails' # デバック関連
+gem 'rails_12factor', group: :production # herokuデバック関連
 gem 'view_source_map' # render表示

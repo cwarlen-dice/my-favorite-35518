@@ -15,12 +15,13 @@ end
 #
 # Table name: items
 #
-#  id         :bigint           not null, primary key
-#  comment    :text(65535)
-#  name       :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint           not null
+#  id                :bigint           not null, primary key
+#  comment           :text(65535)
+#  impressions_count :integer          default(0), not null
+#  name              :string(255)
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  user_id           :bigint           not null
 #
 # Indexes
 #
