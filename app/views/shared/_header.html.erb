@@ -1,9 +1,11 @@
 <header>
       <% if user_signed_in? %>
-        <% unless controller.action_name == 'show' %>
-          <%= link_to current_user.nickname, user_path(current_user.id) %>
-        <%# elsif @user.defined? %>
-          <%#= link_to :編集, edit_user_path(current_user.id) %>
+        <% if controller.action_name != 'show' %>
+          <%= link_to "#{current_user.nickname}:マイページ", user_path(current_user.id) %>
+        <% elsif @user.id == current_user.id %>
+          <%= link_to :編集, edit_user_path(current_user.id) %>
+        <% else %>
+          <%= link_to(:トップページ, root_path) %>
         <% end %>
         <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
       <% else %>

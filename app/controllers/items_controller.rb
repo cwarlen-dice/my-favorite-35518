@@ -22,7 +22,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:user_id])
     @item = Item.find(params[:id])
     impressionist(@item) # PVカウントアップ
   end
