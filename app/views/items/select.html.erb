@@ -1,17 +1,16 @@
 <%= render "shared/header" %>
 
+<% unless @select_items.nil? %>
 <div class="select">
-
   <% unless @genre.nil? %>
   <%= 'ジャンル:' %>
-  <%= @genre %>
+  <%= "#{@genre[:data]} 関連画像" %>
   <% else %>
   <%= 'タグ:' %>
-  <%= @tag %>
+  <%= "#{@tag.name} 関連画像" %>
   <% end %>
-  <%= ':関連画像' %>
-
 </div>
+
 <div class="image-list">
   <% @select_items.each do |f| %>
   <div class="image">
@@ -19,3 +18,6 @@
   </div>
   <% end %>
 </div>
+<% else %>
+<%= 'アイテムなし' %>
+<% end %>

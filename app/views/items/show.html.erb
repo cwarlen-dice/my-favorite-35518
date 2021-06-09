@@ -6,21 +6,13 @@
 </div><br />
 <div class="genre">
   <%= "ジャンル："%>
-  <%= form_with(url: selects_path, method: :post, local: true) do |f| %>
-  <%= f.hidden_field :select, value: :genre %>
-  <%= f.hidden_field :genre_id, value: @item.item_genre_mts[0].genre_id %>
-  <%= link_to(Genre.data[@item.item_genre_mts[0].genre_id][:data], 'javascript:void(0);', onclick: 'this.parentNode.submit()') %>
-  <% end %><br />
+  <%= link_to(Genre.data[@item.item_genre_mts[0].genre_id][:data], selects_path(genre: Genre.data[@item.item_genre_mts[0].genre_id][:data])) %>
 </div><br />
 <div class="tag-list">
   <%= "タグ:" %><br />
   <% @item.tags.each do |tag| %>
   <div class="tag">
-    <%= form_with(url: selects_path, method: :post, local: true) do |f| %>
-    <%= f.hidden_field :select, value: :tag %>
-    <%= f.hidden_field :tag_id, value: tag.id %>
-    <%= link_to(tag.name, 'javascript:void(0);', onclick: 'this.parentNode.submit()') %>
-    <% end %>
+    <%= link_to(tag.name, selects_path(tag: tag.name)) %>
   </div>
   <% end %><br />
 </div>

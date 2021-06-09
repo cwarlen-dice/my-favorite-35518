@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: 'items#index'
-  post 'selects', to: 'items#select'
+  get 'selects', to: 'items#select'
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   resources :items, only: %i[index]
