@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
-  before_action :no_user, except: %i[index]
-  before_action :set_user, except: %i[index]
-  before_action :check_user, except: %i[index show]
+  before_action :no_user, except: %i[index select]
+  before_action :set_user, except: %i[index select]
+  before_action :check_user, except: %i[index show select]
 
   def index
   end
@@ -22,8 +22,22 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+    @item = Item.includes(:item_genre_mts).includes(:tags).find(params[:id])
     impressionist(@item) # PVカウントアップ
+  end
+
+  def select
+    case params[:select]
+    when 'tag'
+      sql = "SELECT `item_tag_mts`.* FROM `item_tag_mts` WHERE \
+      `item_tag_mts`.`tag_id` = #{params[:tag_id]} ORDER BY updated_at DESC"
+      @tag = Tag.find(params[:tag_id]).name
+    when 'genre'
+      sql = "SELECT `item_genre_mts`.* FROM `item_genre_mts` WHERE \
+      `item_genre_mts`.`genre_id` = #{params[:genre_id]} ORDER BY updated_at DESC"
+      @genre = Genre.find(params[:genre_id])[:data]
+    end
+    @select_items = ItemTagMt.includes(:item).find_by_sql(sql)
   end
 
   private

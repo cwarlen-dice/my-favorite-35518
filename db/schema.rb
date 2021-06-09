@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 2021_06_03_122600) do
     t.bigint "tag_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id", "tag_id"], name: "index_item_tag_mts_on_item_id_and_tag_id", unique: true
     t.index ["item_id"], name: "index_item_tag_mts_on_item_id"
     t.index ["tag_id"], name: "index_item_tag_mts_on_tag_id"
   end

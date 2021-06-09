@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+  post 'selects', to: 'selects#index'
   root to: 'items#index'
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
-  resources :items, only: %i[index]
+  resources :items, only: %i[index] do
+    collection do
+      post 'select'
+    end
+  end
   resources :users, only: %i[show edit update] do
     resources :items, only: %i[create new show]
   end
@@ -12,6 +17,7 @@ end
 # == Route Map
 #
 #                                Prefix Verb   URI Pattern                                                                              Controller#Action
+#                         selects_index POST   /selects/index(.:format)                                                                 selects#index
 #                                  root GET    /                                                                                        items#index
 #                      new_user_session GET    /users/sign_in(.:format)                                                                 devise/sessions#new
 #                          user_session POST   /users/sign_in(.:format)                                                                 devise/sessions#create
@@ -37,6 +43,7 @@ end
 #                                       PUT    /admin/password(.:format)                                                                active_admin/devise/passwords#update
 #                                       POST   /admin/password(.:format)                                                                active_admin/devise/passwords#create
 #                                 items GET    /items(.:format)                                                                         items#index
+#                               selects GET    /selects(.:format)                                                                       selects#index
 #                            user_items POST   /users/:user_id/items(.:format)                                                          items#create
 #                         new_user_item GET    /users/:user_id/items/new(.:format)                                                      items#new
 #                             user_item GET    /users/:user_id/items/:id(.:format)                                                      items#show

@@ -16,8 +16,9 @@ end
 #
 # Indexes
 #
-#  index_item_tag_mts_on_item_id  (item_id)
-#  index_item_tag_mts_on_tag_id   (tag_id)
+#  index_item_tag_mts_on_item_id             (item_id)
+#  index_item_tag_mts_on_item_id_and_tag_id  (item_id,tag_id) UNIQUE
+#  index_item_tag_mts_on_tag_id              (tag_id)
 #
 # Foreign Keys
 #

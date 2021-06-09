@@ -5,5 +5,6 @@ class CreateItemTagMts < ActiveRecord::Migration[6.0]
       t.references :tag, foreign_key: true
       t.timestamps
     end
+    add_index :item_tag_mts, [:item_id, :tag_id], unique: true   # 組み合わせを一意にする
   end
 end

@@ -1,6 +1,8 @@
 class ItemTagMt < ApplicationRecord
   belongs_to :item
   belongs_to :tag
+
+  validates :item_id, uniqueness: { scope: :tag_id }  # 組み合わせを一意にする
 end
 
 # == Schema Information
@@ -15,8 +17,9 @@ end
 #
 # Indexes
 #
-#  index_item_tag_mts_on_item_id  (item_id)
-#  index_item_tag_mts_on_tag_id   (tag_id)
+#  index_item_tag_mts_on_item_id             (item_id)
+#  index_item_tag_mts_on_item_id_and_tag_id  (item_id,tag_id) UNIQUE
+#  index_item_tag_mts_on_tag_id              (tag_id)
 #
 # Foreign Keys
 #
