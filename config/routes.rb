@@ -1,13 +1,9 @@
 Rails.application.routes.draw do
-  post 'selects', to: 'selects#index'
   root to: 'items#index'
+  post 'selects', to: 'items#select'
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
-  resources :items, only: %i[index] do
-    collection do
-      post 'select'
-    end
-  end
+  resources :items, only: %i[index]
   resources :users, only: %i[show edit update] do
     resources :items, only: %i[create new show]
   end
