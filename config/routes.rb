@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   resources :items, only: %i[index]
   resources :users, only: %i[show edit update] do
-    resources :items, only: %i[create new show]
+    resources :items, only: %i[create new show edit update]
   end
   ActiveAdmin.routes(self)
 end
@@ -13,8 +13,8 @@ end
 # == Route Map
 #
 #                                Prefix Verb   URI Pattern                                                                              Controller#Action
-#                         selects_index POST   /selects/index(.:format)                                                                 selects#index
 #                                  root GET    /                                                                                        items#index
+#                               selects GET    /selects(.:format)                                                                       items#select
 #                      new_user_session GET    /users/sign_in(.:format)                                                                 devise/sessions#new
 #                          user_session POST   /users/sign_in(.:format)                                                                 devise/sessions#create
 #                  destroy_user_session DELETE /users/sign_out(.:format)                                                                devise/sessions#destroy
@@ -39,10 +39,12 @@ end
 #                                       PUT    /admin/password(.:format)                                                                active_admin/devise/passwords#update
 #                                       POST   /admin/password(.:format)                                                                active_admin/devise/passwords#create
 #                                 items GET    /items(.:format)                                                                         items#index
-#                               selects GET    /selects(.:format)                                                                       selects#index
 #                            user_items POST   /users/:user_id/items(.:format)                                                          items#create
 #                         new_user_item GET    /users/:user_id/items/new(.:format)                                                      items#new
+#                        edit_user_item GET    /users/:user_id/items/:id/edit(.:format)                                                 items#edit
 #                             user_item GET    /users/:user_id/items/:id(.:format)                                                      items#show
+#                                       PATCH  /users/:user_id/items/:id(.:format)                                                      items#update
+#                                       PUT    /users/:user_id/items/:id(.:format)                                                      items#update
 #                             edit_user GET    /users/:id/edit(.:format)                                                                users#edit
 #                                  user GET    /users/:id(.:format)                                                                     users#show
 #                                       PATCH  /users/:id(.:format)                                                                     users#update
