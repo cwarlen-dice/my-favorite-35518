@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show select]
   before_action :no_user, except: %i[index show select]
-  before_action :set_user, except: %i[index show select]
+  before_action :set_user, except: %i[index select]
   before_action :check_user, except: %i[index show select]
 
   def index
