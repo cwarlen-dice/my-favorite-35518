@@ -47,9 +47,16 @@ class ItemsController < ApplicationController
   private
 
   def item_options_params
-    params.require(:item_options).permit(:name, :comment, :genre_id, :image, tags: []).merge(
-      user_id: current_user.id
-    )
+    case action_name
+    when 'create'
+      params.require(:item_options).permit(:name, :comment, :genre_id, :image, tags: []).merge(
+        user_id: current_user.id
+      )
+    when 'update'
+      params.require(:item_options).permit(:name, :comment, :genre_id, :image, tags: []).merge(
+        user_id: current_user.id, item_id: params[:id]
+      )
+    end
   end
 
   def check_user
