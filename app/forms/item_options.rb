@@ -2,7 +2,6 @@ class ItemOptions
   include ActiveModel::Model
   attr_accessor :name, :comment, :genre_id, :image, :user_id, :tags, :item_id
 
-  # binding.pry
   with_options presence: true do
     validates :image, if: :item_id?
     validates :tags
