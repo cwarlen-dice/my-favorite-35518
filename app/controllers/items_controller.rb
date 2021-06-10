@@ -1,8 +1,9 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, except: %i[index]
-  before_action :no_user, except: %i[index select]
+  before_action :authenticate_user!, except: %i[index show select]
+  before_action :no_user, except: %i[index show select]
   before_action :set_user, except: %i[index select]
   before_action :check_user, except: %i[index show select]
+  before_action :set_one_item, only: %i[edit update]
 
   def index
   end
@@ -12,12 +13,27 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item_options = ItemOptions.new(item_options_params)
-    if @item_options.valid?
-      @item_options.save
+    item_create = ItemOptions.new(item_options_params)
+    if item_create.valid?
+      item_create.save
       redirect_to(user_path(current_user.id)) and return
     else
+      @item_options = item_create
       render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    item_update = ItemOptions.new(item_options_params)
+    if item_update.valid?
+      item_update.update
+      redirect_to(user_path(current_user.id)) and return
+    else
+      @item_options = item_update
+      render :edit
     end
   end
 
@@ -47,9 +63,15 @@ class ItemsController < ApplicationController
   private
 
   def item_options_params
-    params.require(:item_options).permit(:name, :comment, :genre_id, :image, tags: []).merge(
-      user_id: current_user.id
-    )
+    if action_name == 'create'
+      params.require(:item_options).permit(:name, :comment, :genre_id, :image, tags: []).merge(
+        user_id: current_user.id
+      )
+    elsif action_name == 'update'
+      params.require(:item_options).permit(:name, :comment, :genre_id, :image, tags: []).merge(
+        user_id: current_user.id, item_id: params[:id]
+      )
+    end
   end
 
   def check_user
@@ -62,5 +84,9 @@ class ItemsController < ApplicationController
 
   def no_user
     redirect_to(root_path) if User.find_by(id: params[:user_id]).nil?
+  end
+
+  def set_one_item
+    @item_options = Item.find(params[:id])
   end
 end

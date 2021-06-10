@@ -1,43 +1,51 @@
 <%= render "shared/header" %>
 
-  <%= link_to(:プロフィール表示, 'javascript:void(0);', { id: "edit-btn" }) %>
-  <div id="profile" style="display: none;">
-    <%= "誕生日：#{@user.birthday}" %><br />
-    血液型：
-    <%= @user.blood_type[:data] unless @user.blood_type.blank? || @user.blood_type_id.zero? %>
-    <br />
-    <%= "プロフィール：#{@user.profile}" %><br />
-    プロフィール画像：<br />
-      <%= image_tag @user.image, class: "profile-img" if @user.image.attached? %>
-    <br />
-    <% if user_signed_in? && current_user.id == @user.id %>
-      <%= link_to(:編集, edit_user_path(@user.id))  %>
-    <% end %>
-  </div><br />
-
+<%= link_to(:プロフィール表示, 'javascript:void(0);', { id: "edit-btn" }) %>
+<div id="profile" style="display: none;">
+  <%= "誕生日：#{@user.birthday}" %><br />
+  血液型：
+  <%= @user.blood_type[:data] unless @user.blood_type.blank? || @user.blood_type_id.zero? %>
+  <br />
+  <%= "プロフィール：#{@user.profile}" %><br />
+  プロフィール画像：<br />
+  <%= image_tag @user.image, class: "profile-img" if @user.image.attached? %>
+  <br />
   <% if user_signed_in? && current_user.id == @user.id %>
-    <%= link_to(:投稿, new_user_item_path(@user.id)) %><br />
+  <%= link_to(:編集, edit_user_path(@user.id))  %>
   <% end %>
+</div><br />
 
-  <%= "PV数：#{@user.impressions_count }"%>
-  投稿一覧
-    <%= form_with(url: '#', local: false) do |f| %>
-      <%= f.collection_select(:genre_id, Genre.all, :id, :data, { prompt: 'フィルターなし' }, {class:"select-box-genre-sort", id:"item-genre-sort", :onchange => "this.id = \"item-genre-sort-\"+this.value"}) %>
+<% if user_signed_in? && current_user.id == @user.id %>
+<%= link_to(:投稿, new_user_item_path(@user.id)) %><br />
+<% end %>
+
+<%= "PV数：#{@user.impressions_count }"%>
+投稿一覧
+<%= form_with(url: '#', local: false) do |f| %>
+<%= f.collection_select(:genre_id, Genre.all, :id, :data, { prompt: 'フィルターなし' }, {class:"select-box-genre-sort", id:"item-genre-sort", :onchange => "this.id = \"item-genre-sort-\"+this.value"}) %>
+<% end %>
+ジャンル
+<div class="image-genre">
+  <% @genre.each do |g| %>
+  <div class="item-genre" id="item-genre-<%= g.genre_id %>" style="display: block;">
+    <%= Genre.data[g.genre_id][:data] %>
+    <% @item_genre.each do |item_genre| %>
+    <% if item_genre.genre_id == g.genre_id %>
+    <% if item_genre.user_id == current_user.id %>
+    <%= link_to edit_user_item_path(item_genre.user_id, item_genre.item_id) do %>
+    <div class="image_tag">
+      <%= image_tag(item_genre.item.image, class: "item-img") if item_genre.item.image.attached? %>
+    </div>
     <% end %>
-  ジャンル
-  <div class="image-genre">
-    <% @genre.each do |g| %>
-      <div class="item-genre" id="item-genre-<%= g.genre_id %>" style="display: block;" >
-        <%= Genre.data[g.genre_id][:data] %>
-          <% @item_genre.each do |item_genre| %>
-            <% if item_genre.genre_id == g.genre_id %>
-              <%= link_to user_item_path(item_genre.user_id, item_genre.item_id) do %>
-                <div class="image_tag">
-                  <%= image_tag(item_genre.item.image, class: "item-img") %>
-                </div>
-              <% end %>
-            <% end %>
-          <% end %>
-      </div>
+    <% else %>
+    <%= link_to user_item_path(item_genre.user_id, item_genre.item_id) do %>
+    <div class="image_tag">
+      <%= image_tag(item_genre.item.image, class: "item-img") if item_genre.item.image.attached? %>
+    </div>
+    <% end %>
+    <% end %>
+    <% end %>
     <% end %>
   </div>
+  <% end %>
+</div>
