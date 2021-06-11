@@ -1,0 +1,43 @@
+<header>
+  <% if user_signed_in? %>
+  <% if controller.action_name != 'show' %>
+  <%= link_to "#{current_user.nickname}:マイページ", user_path(current_user.id) %>
+  <% elsif @user.id == current_user.id && controller.controller_name == 'users'%>
+  <%= link_to :編集, edit_user_path(current_user.id) %>
+  <% else %>
+  <%= link_to(:トップページ, root_path) %>
+  <% end %>
+  <% if @user.nil? || @user.id == current_user.id %>
+  <%= link_to :メッセージ確認, '#' %>
+  <% else %>
+  <%= link_to :メッセージを送る, '#' %>
+  <% end %>
+  <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+  <% else %>
+  <%= link_to 'ログイン', new_user_session_path %>
+  <%= link_to '新規登録', new_user_registration_path %>
+  <% end %><br />
+  <%= "#{controller.controller_name}:#{controller.action_name}"%>
+  <br />
+</header>
+<%
+=begin
+%>
+<% case controller.controller_name when 'items'%>
+<%= render partial: 'shared/header_items'%>
+<%when "users"%>
+<%= render partial: 'shared/header_users'%>
+<%end%>
+
+<%= link_to("#{current_user.nickname}:マイページ", user_path(current_user.id)) if !show? && !c_user? %>
+<% if @user.nil? || @user.id == current_user.id %>
+<%= link_to(:編集, edit_user_path(current_user.id)) if c_user? && crud_r? %>
+<%= link_to(:メッセージ確認, '#') %>
+<% else %>
+<%= link_to(:メッセージを送る, '#') %>
+<% end %>
+
+
+<%
+=end
+%>

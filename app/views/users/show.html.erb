@@ -31,7 +31,7 @@
     <%= Genre.data[g.genre_id][:data] %>
     <% @item_genre.each do |item_genre| %>
     <% if item_genre.genre_id == g.genre_id %>
-    <% if item_genre.user_id == current_user.id %>
+    <% if !current_user.nil? && item_genre.user_id == current_user.id %>
     <%= link_to edit_user_item_path(item_genre.user_id, item_genre.item_id) do %>
     <div class="image_tag">
       <%= image_tag(item_genre.item.image, class: "item-img") if item_genre.item.image.attached? %>
