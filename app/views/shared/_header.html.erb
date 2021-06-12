@@ -8,9 +8,9 @@
   <% if show? %>
   <% if @user.nil? || @user.id == current_user.id %>
   <%= link_to(:編集, edit_user_path(current_user.id)) %>
-  <%= link_to(:メッセージ確認, '#') %>
+  <%= link_to(:メッセージ確認, user_rooms_path(current_user.id)) %>
   <% else %>
-  <%= link_to(:メッセージを送る, '#') %>
+  <%= link_to(:メッセージを送る, user_rooms_path(@user.id), method: :post) %>
   <% end %>
   <% end %>
   <%= link_to(:ログアウト, destroy_user_session_path, method: :delete) %>

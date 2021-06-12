@@ -1,14 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe RoomUser, type: :model do
+RSpec.describe Message, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end
 
 # == Schema Information
 #
-# Table name: room_users
+# Table name: messages
 #
 #  id         :bigint           not null, primary key
+#  content    :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  room_id    :bigint
@@ -16,9 +17,8 @@ end
 #
 # Indexes
 #
-#  index_room_users_on_room_id              (room_id)
-#  index_room_users_on_user_id              (user_id)
-#  index_room_users_on_user_id_and_room_id  (user_id,room_id) UNIQUE
+#  index_messages_on_room_id  (room_id)
+#  index_messages_on_user_id  (user_id)
 #
 # Foreign Keys
 #

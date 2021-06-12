@@ -5,5 +5,6 @@ class CreateRoomUsers < ActiveRecord::Migration[6.0]
       t.references :room, foreign_key: true
       t.timestamps
     end
+    add_index :room_users, [:user_id, :room_id], unique: true   # 組み合わせを一意にする
   end
 end
