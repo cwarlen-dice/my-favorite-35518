@@ -1,4 +1,4 @@
-class RoomsController < ApplicationController
+class MessageRoomsController < ApplicationController
   before_action :authenticate_user!
 
   def index
@@ -15,11 +15,11 @@ class RoomsController < ApplicationController
       end
     end
 
-    redirect_to user_room_messages_path(current_user.id, @is_room) and return unless @is_room.blank?
+    redirect_to user_message_room_messages_path(current_user.id, @is_room) and return unless @is_room.blank?
 
     room = Room.new(user_ids: [current_user.id, params[:user_id]])
     if room.save
-      redirect_to(user_room_messages_path(current_user.id, room.id))
+      redirect_to(user_message_room_messages_path(current_user.id, room.id))
     else
       render :index
     end

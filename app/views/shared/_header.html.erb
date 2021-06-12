@@ -8,15 +8,15 @@
   <% if show? %>
   <% if @user.nil? || @user.id == current_user.id %>
   <%= link_to(:編集, edit_user_path(current_user.id)) %>
-  <%= link_to(:メッセージ確認, user_rooms_path(current_user.id)) %>
+  <%= link_to(:メッセージ確認, user_message_rooms_path(current_user.id)) %>
   <% else %>
-  <%= link_to(:メッセージを送る, user_rooms_path(@user.id), method: :post) %>
+  <%= link_to(:メッセージを送る, user_message_rooms_path(@user.id), method: :post) %>
   <% end %>
   <% end %>
   <%= link_to(:ログアウト, destroy_user_session_path, method: :delete) %>
   <% else %>
   <%= link_to(:ログイン, new_user_session_path) %>
-  <%= link_to(:新規登録, new_user_registration_path )%>
+  <%= link_to(:新規登録, new_user_registration_path) %>
   <% end %><br />
   <%= "#{controller.controller_name}:#{controller.action_name}"%>
   <br />

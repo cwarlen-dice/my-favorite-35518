@@ -1,15 +1,15 @@
 class MessagesController < ApplicationController
   def index
-    @room = Room.find(params[:room_id])
+    @room = Room.includes(:messages).find(params[:message_room_id])
     @message = Message.new
-    @messages = @room.messages.includes(:user)
+    @messages = @room.messages.with_attached_image.includes(:user)
   end
 
   def create
-    @room = Room.find(params[:room_id])
+    @room = Room.find(params[:message_room_id])
     @message = @room.messages.new(message_params)
     if @message.save
-      redirect_to user_room_messages_path(current_user.id, @room.id)
+      redirect_to user_message_room_messages_path(current_user.id, @room.id)
     else
       @messages = @room.messages.includes(:user)
       render :index

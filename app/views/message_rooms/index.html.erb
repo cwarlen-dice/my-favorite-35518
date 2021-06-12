@@ -5,7 +5,7 @@
   <% @rooms.each do |rmt| %>
   <div class="menber">
     <% rmt.room.users.each do |u| %>
-    <%= link_to(u.nickname, user_room_messages_path(current_user.id, rmt.room_id), method: :get) if (current_user.id != u.id) %>
+    <%= link_to(u.nickname, user_message_room_messages_path(current_user.id, rmt.room_id), method: :get) if (current_user.id != u.id) %>
     <% end %>
   </div>
   <% end %>
