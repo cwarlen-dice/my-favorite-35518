@@ -8,27 +8,31 @@
     <%= f.file_field :image, class: 'hidden' %>
   </label>
 </div>
-<%= f.submit '送信', class: 'form-submit' %>
+<%= f.button '送信', type: 'button', class: 'form-submit', id: 'message-commit', onclick: 'submit()' %>
 <% end %>
 <br />
-<% @messages.reverse_each do |message| %>
-<div class="message">
-  <div class="upper-message">
-    <div class="message-user">
-      <!-- 投稿したユーザー名情報を出力する -->
-      <%= message.user.nickname %>
-    </div>
-    <div class="message-date">
-      <!-- 投稿した時刻を出力する -->
-      <%= message.created_at %>
-    </div>
-  </div>
-  <div class="lower-message">
+
+<div class="message_list" id="messages">
+  <% @messages.reverse_each do |message| %>
+  <div class="message<%= " ms-right" if message.user.id != current_user.id %>">
     <div class="message-content">
-      <!-- 投稿したメッセージ内容を記述する -->
-      <%= message.content %>
+      <div class="message-comment">
+        <%= message.content %>
+      </div>
+      <div class="message-img">
+        <%= image_tag message.image.variant(resize: '500x500'), class: 'message-image' if message.image.attached? %>
+      </div>
+      <div class="message-date" style='display: none;'>
+        <%= message.created_at %>
+      </div>
     </div>
-    <%= image_tag message.image.variant(resize: '500x500'), class: 'message-image' if message.image.attached? %>
+    <% if message.user.id == current_user.id %>
+    <div class="message-del">
+      <%= link_to(user_message_room_message_path(current_user.id, message.room_id, message.id), method: :delete) do %>
+      <input value='✕' type='button' onclick='this.closest(".message").remove()'>
+      <% end %>
+    </div>
+    <% end %>
   </div>
+  <% end %>
 </div>
-<% end %>

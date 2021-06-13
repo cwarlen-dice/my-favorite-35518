@@ -3,17 +3,23 @@ class MessagesController < ApplicationController
     @room = Room.includes(:messages).find(params[:message_room_id])
     @message = Message.new
     @messages = @room.messages.with_attached_image.includes(:user)
+    # binding.pry
   end
 
   def create
     @room = Room.find(params[:message_room_id])
     @message = @room.messages.new(message_params)
     if @message.save
-      redirect_to user_message_room_messages_path(current_user.id, @room.id)
+      ActionCable.server.broadcast 'message_channel', content: @message
     else
       @messages = @room.messages.includes(:user)
       render :index
     end
+  end
+
+  def destroy
+    message = Message.find(params[:id])
+    message.destroy
   end
 
   private
