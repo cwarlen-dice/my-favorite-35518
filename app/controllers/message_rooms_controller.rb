@@ -24,4 +24,9 @@ class MessageRoomsController < ApplicationController
       render :index
     end
   end
+
+  def destroy
+    room = Room.find(params[:id])
+    room.destroy
+  end
 end
