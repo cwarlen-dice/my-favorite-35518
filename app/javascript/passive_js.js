@@ -65,5 +65,16 @@ window.addEventListener('load', function () {
     });
   }
 
+  if (document.querySelectorAll('.user-del')) {
+    const trigger = document.querySelectorAll('.user-del');
+    trigger.forEach(function (target) {
+      target.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (window.confirm('ユーザーをリストから削除すると、そのユーザーとの全てのメッセージも削除されます。\n本当によろしいですね？')) {
+          this.previousElementSibling.click();
+        }
+      });
+    });
+  }
 
 });

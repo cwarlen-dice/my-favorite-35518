@@ -14,7 +14,7 @@
 <div class="image-list">
   <% @select_items.each do |f| %>
   <div class="image">
-    <%= image_tag(f.item.image, class: "item-img") %>
+    <%= image_tag(f.item.image, class: "item-img") if f.item.image.attached? %>
   </div>
   <% end %>
 </div>

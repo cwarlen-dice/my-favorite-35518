@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :items, only: %i[index]
   resources :users, only: %i[show edit update] do
     resources :items, only: %i[create new show edit update]
+    resources :message_rooms, only: %i[index create destroy] do
+      resources :messages, only: %i[index create destroy]
+    end
   end
   ActiveAdmin.routes(self)
 end
@@ -45,6 +48,11 @@ end
 #                             user_item GET    /users/:user_id/items/:id(.:format)                                                      items#show
 #                                       PATCH  /users/:user_id/items/:id(.:format)                                                      items#update
 #                                       PUT    /users/:user_id/items/:id(.:format)                                                      items#update
+#                    user_room_messages GET    /users/:user_id/rooms/:room_id/messages(.:format)                                        messages#index
+#                                       POST   /users/:user_id/rooms/:room_id/messages(.:format)                                        messages#create
+#                            user_rooms GET    /users/:user_id/rooms(.:format)                                                          rooms#index
+#                                       POST   /users/:user_id/rooms(.:format)                                                          rooms#create
+#                             user_room DELETE /users/:user_id/rooms/:id(.:format)                                                      rooms#destroy
 #                             edit_user GET    /users/:id/edit(.:format)                                                                users#edit
 #                                  user GET    /users/:id(.:format)                                                                     users#show
 #                                       PATCH  /users/:id(.:format)                                                                     users#update

@@ -1,0 +1,38 @@
+<%= render "shared/header" %>
+
+<%= form_with model: [@message], url: user_message_room_messages_path(current_user.id, @room.id), local: true, class: "form" do |f| %>
+<div class="form-input">
+  <%= f.text_field :content, class: 'form-message', placeholder: 'type a message' %>
+  <label class="form-image">
+    <span class="image-file">画像</span>
+    <%= f.file_field :image, class: 'hidden' %>
+  </label>
+</div>
+<%= f.button '送信', type: 'button', class: 'form-submit', id: 'message-commit', onclick: 'submit()' %>
+<% end %>
+<br />
+
+<div class="message_list" id="messages">
+  <% @messages.reverse_each do |message| %>
+  <div class="message<%= " ms-right" if message.user.id != current_user.id %>">
+    <div class="message-content">
+      <div class="message-comment">
+        <%= message.content %>
+      </div>
+      <div class="message-img">
+        <%= image_tag message.image.variant(resize: '500x500'), class: 'message-image' if message.image.attached? %>
+      </div>
+      <div class="message-date" style='display: none;'>
+        <%= message.created_at %>
+      </div>
+    </div>
+    <% if message.user.id == current_user.id %>
+    <div class="message-del">
+      <%= link_to(user_message_room_message_path(current_user.id, message.room_id, message.id), method: :delete) do %>
+      <input value='✕' type='button' onclick='this.closest(".message").remove()'>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+</div>

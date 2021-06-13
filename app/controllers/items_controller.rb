@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show select]
   before_action :no_user, except: %i[index show select]
-  before_action :set_user, except: %i[index select]
+  before_action :set_user, except: %i[index select], if: :user_in?
   before_action :check_user, except: %i[index show select]
   before_action :set_one_item, only: %i[edit update]
 
@@ -89,5 +89,9 @@ class ItemsController < ApplicationController
 
   def set_one_item
     @item_options = Item.find(params[:id])
+  end
+
+  def user_in?
+    user_signed_in?
   end
 end

@@ -1,0 +1,24 @@
+// Place all the styles related to the messages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.message_list {
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  // margin: 0 4px;
+}
+
+.message-del {
+
+  margin: 0 0 0 5px;
+}
+
+
+.ms-right {
+  margin: 0 0 0 auto;
+}
