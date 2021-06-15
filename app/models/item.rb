@@ -4,6 +4,7 @@ class Item < ApplicationRecord
   belongs_to :user
   has_many :item_tag_mts, dependent: :destroy
   has_many :tags, through: :item_tag_mts
+  has_many :permit_images, through: :users
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :genre, through: :item_genre_mts

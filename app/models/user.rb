@@ -30,6 +30,7 @@ class User < ApplicationRecord
   has_many :room_users
   has_many :rooms, through: :room_users
   has_many :messages
+  has_many :permit_images, through: :items
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :blood_type

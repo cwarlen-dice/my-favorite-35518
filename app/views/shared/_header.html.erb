@@ -13,6 +13,7 @@
   <%= link_to(:メッセージを送る, user_message_rooms_path(@user.id), method: :post) %>
   <% end %>
   <% end %>
+  <%= link_to(:メッセージ機能について, permits_path, method: :get) %>
   <%= link_to(:ログアウト, destroy_user_session_path, method: :delete) %>
   <% else %>
   <%= link_to(:ログイン, new_user_session_path) %>
