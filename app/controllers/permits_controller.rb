@@ -18,18 +18,11 @@ class PermitsController < ApplicationController
     params[:item_ids].each_with_index do |id, i|
       items[i] = PermitImage.new(item_id: id, user_id: params[:user_id])
     end
-    last_num = items.length - 1
-    num = 0
-    while items[num].valid?
-      if num == last_num
-        record_create(items)
-        redirect_to(permits_path) and return
-      end
-
-      num += 1
+    if items.map(&:valid?).all? # 全て登録できるか確認
+      items.map(&:save).all? # 全ての値を保存
+      redirect_to(permits_path) and return
     end
-
-    @permit_image = items[num]
+    @permit_image = items
     @user = User.find(params[:user_id])
     genre_sql = "SELECT DISTINCT genre_id FROM item_genre_mts WHERE user_id=#{@user.id} ORDER BY genre_id ASC"
     item_genre_sql = "SELECT * FROM item_genre_mts WHERE user_id=#{@user.id} ORDER BY genre_id ASC, updated_at DESC"
@@ -39,11 +32,5 @@ class PermitsController < ApplicationController
     render :new
   end
 
-  private
-
-  def record_create(items)
-    items.each do |item|
-      item.save
-    end
-  end
+  # private
 end

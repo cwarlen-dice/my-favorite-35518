@@ -43,6 +43,7 @@ group :development do
   gem 'annotate'
   gem 'better_errors' # エラー画面をわかりやすく整形してくれる
   gem 'binding_of_caller' # better_errorsの画面上にirb/pry(PERL)を表示する
+  gem 'rails-erd' # ER図作成
   gem 'rubocop', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

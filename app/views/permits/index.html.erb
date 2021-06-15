@@ -9,4 +9,10 @@
   画像選択にて、相手の承認画像を選択することができれば、メッセージを送ることができるようになります。<br />
 </div>
 <br />
-<%= link_to(:承認画像を設定, new_user_permit_path(current_user.id), method: :get) %>
+
+<% unless current_user.permit_images.blank? %>
+<%#= link_to(:設定済み：承認画像を変更する, '#') %>
+<%= link_to(:設定済み：承認画像を変更する, new_user_permit_path(current_user.id)) %>
+<% else %>
+<%= link_to(:未設定：承認画像を設定する, new_user_permit_path(current_user.id)) %>
+<% end %>
