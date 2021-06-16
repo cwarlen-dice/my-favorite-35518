@@ -12,3 +12,12 @@
   width: 200px;
   height: 200px;
 }
+
+.image-checks {
+  position: relative;
+  display: inline-block;
+}
+
+.image-check-box {
+  position: absolute;
+}

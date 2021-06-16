@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # get 'permits/index'
+  # get 'permits/create'
   root to: 'items#index'
   get 'selects', to: 'items#select'
   devise_for :users
@@ -9,7 +11,13 @@ Rails.application.routes.draw do
     resources :message_rooms, only: %i[index create destroy] do
       resources :messages, only: %i[index create destroy]
     end
+    resources :permits, only: %i[new create] do
+      collection do
+        get 'check', to: 'permits#check'
+      end
+    end
   end
+  resources :permits, only: %i[index]
   ActiveAdmin.routes(self)
 end
 

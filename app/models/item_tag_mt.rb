@@ -2,7 +2,7 @@ class ItemTagMt < ApplicationRecord
   belongs_to :item
   belongs_to :tag
 
-  validates :item_id, uniqueness: { scope: :tag_id }  # 組み合わせを一意にする
+  validates :tag_id, uniqueness: { scope: :item_id }  # 組み合わせを一意にする
 end
 
 # == Schema Information

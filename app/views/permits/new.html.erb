@@ -1,0 +1,32 @@
+<%= render "shared/header" %>
+
+<%= form_with(model: @permit_image, url: user_permits_path(current_user.id), id: 'image-select', local: true) do |f| %>
+
+<%= render 'shared/error_messages', model: f.object %>
+
+
+
+<div class="image-genre">
+  <% @genre.each do |g| %>
+  <div class="item-genre" id="item-genre-<%= g.genre_id %>" style="display: block;">
+    <%= Genre.data[g.genre_id][:data] %><br />
+    <% @item_genre.each do |item_genre| %>
+    <% if item_genre.genre_id == g.genre_id %>
+    <label>
+      <div class="image-checks">
+        <div class="image-check-box">
+          <input type="checkbox" name="permit_image[item_id]" value="<%= item_genre.item.id %>">
+        </div>
+        <div class="image_tag">
+          <%= image_tag(item_genre.item.image, class: "item-img") if item_genre.item.image.attached? %>
+        </div>
+      </div>
+    </label>
+    <% end %>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+
+<%= f.submit "決定", id: 'image-select-sub' %>
+<% end %>

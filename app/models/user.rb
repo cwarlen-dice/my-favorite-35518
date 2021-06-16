@@ -26,6 +26,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_one_attached :image
   has_many :items
+  has_many :permit_images
   has_many :item_genre_mts
   has_many :room_users
   has_many :rooms, through: :room_users

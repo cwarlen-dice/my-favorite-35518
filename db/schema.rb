@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_12_075423) do
+ActiveRecord::Schema.define(version: 2021_06_15_004244) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -127,6 +127,16 @@ ActiveRecord::Schema.define(version: 2021_06_12_075423) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "permit_images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "item_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id", "user_id"], name: "index_permit_images_on_item_id_and_user_id", unique: true
+    t.index ["item_id"], name: "index_permit_images_on_item_id"
+    t.index ["user_id"], name: "index_permit_images_on_user_id"
+  end
+
   create_table "room_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "room_id"
@@ -173,6 +183,8 @@ ActiveRecord::Schema.define(version: 2021_06_12_075423) do
   add_foreign_key "items", "users"
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "permit_images", "items"
+  add_foreign_key "permit_images", "users"
   add_foreign_key "room_users", "rooms"
   add_foreign_key "room_users", "users"
 end

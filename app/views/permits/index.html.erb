@@ -1,0 +1,19 @@
+<%= render "shared/header" %>
+
+<div class="function-message">
+  メッセージ機能について<br />
+  メッセージ機能を使用するためには、手順が必要です。<br />
+  まず、自分の承認画像を設定します。自分の承認画像を設定しないと、メッセージ機能自体が使用できません。<br />
+  次に、承認画像を設定した状態で、相手または画像の詳細ページ移動すると、「メッセージを送る」が表示されます。<br />
+  「メッセージを送る」をクリックすると画像選択画面が起動します。<br />
+  画像選択にて、相手の承認画像を選択することができれば、メッセージを送ることができるようになります。<br />
+</div>
+<br />
+
+<% unless current_user.permit_images.blank? %>
+<%#= link_to(:設定済み：承認画像を変更する, '#') %>
+<%= link_to(:設定済み：承認画像を変更する, new_user_permit_path(current_user.id)) %>
+<% else %>
+<%= link_to(:未設定：承認画像を設定する, new_user_permit_path(current_user.id)) %>
+<% end %>
+<%= link_to(:チェック画面, check_user_permits_path(current_user.id)) %>
