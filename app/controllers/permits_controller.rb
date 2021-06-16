@@ -32,5 +32,8 @@ class PermitsController < ApplicationController
     render :new
   end
 
+  def check
+  end
+
   # private
 end

@@ -11,7 +11,11 @@ Rails.application.routes.draw do
     resources :message_rooms, only: %i[index create destroy] do
       resources :messages, only: %i[index create destroy]
     end
-    resources :permits, only: %i[new create]
+    resources :permits, only: %i[new create] do
+      collection do
+        get 'check', to: 'permits#check'
+      end
+    end
   end
   resources :permits, only: %i[index]
   ActiveAdmin.routes(self)
