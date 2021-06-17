@@ -16,12 +16,14 @@
 <%= f.text_area :comment, name: 'item_options[comment]' %><br />
 
 <% if controller.action_name == 'new' || controller.action_name == 'create' %>
+<%# newかcreateのみ表示 %>
 <%= f.label :タグ %><br />
 <%= f.text_field :tag_name, class: 'tags', name: 'item_options[tags][]', id: 'tag-input-now'%><br />
 <%= f.label :ジャンル %><br />
 <%= f.collection_select(:genre_id, Genre.all, :id, :data, {}, {class:"select-box", id:"item-genre", name: 'item_options[genre_id]'}) %><br />
 <%= f.submit "投稿" %>
 <% elsif controller.action_name == 'edit' %>
+<%# editのみ表示 %>
 <%= f.label :タグ %><br />
 <% f.object.tags.each do |tag| %>
 <div class="tag">
@@ -35,6 +37,7 @@
 <%= f.collection_select(:genre_id, Genre.all, :id, :data, {selected: f.object.item_genre_mt.genre_id}, {class:"select-box", id:"item-genre", name: 'item_options[genre_id]'}) %><br />
 <%= f.submit "更新" %>
 <% elsif controller.action_name == 'update' %>
+<%# updateのみ表示 %>
 <%= f.label :タグ %><br />
 <% params[:item_options][:tags].each do |tag| %>
 <div class="tag">

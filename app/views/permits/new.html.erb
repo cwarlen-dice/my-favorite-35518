@@ -4,6 +4,16 @@
 <%= form_with(model: @permit_image, url: user_permits_path(current_user.id), id: 'image-select', local: true) do |f| %>
 
 <%= render 'shared/error_messages', model: f.object %>
+
+<%= render partial: 'shared/permit_images', locals: {item_genre: @item_genre, f: f} %>
+
+<%= f.submit "決定", id: 'image-select-sub' %>
+<% end %>
+
+<%
+=begin
+%>
+
 <div class="image-genre">
   <% @genre.each do |g| %>
   <div class="item-genre" id="item-genre-<%= g.genre_id %>" style="display: block;">
@@ -27,13 +37,7 @@
   <% end %>
 </div>
 
-<%= f.submit "決定", id: 'image-select-sub' %>
-<% end %>
 
-<%
-=begin
-%>
-<input type="checkbox" name="permit_image[item_id]" value="<%= item_genre.item.id %>">
 <%
 =end
 %>

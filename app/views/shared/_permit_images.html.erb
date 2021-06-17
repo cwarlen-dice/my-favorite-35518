@@ -1,0 +1,24 @@
+<div class="image-genre">
+  <% Genre.all.each do |g| %>
+  <div class="item-genre" id="item-genre-<%= g.id %>" style="display: block;">
+    <%= g.data if g.id != 0 %><br />
+    <% item_genre.each do |item_genre| %>
+    <% next if item_genre.genre_id == 0 %>
+    <% if item_genre.genre_id == g.id %>
+    <label>
+      <div class="image-checks">
+        <% if item_genre.item.permit_image.blank? %>
+        <%= f.check_box :ids, {multiple: true, name: 'check_ids[]', class: 'image-check-box'}, item_genre.item.id, false %>
+        <% else %>
+        <%= f.check_box :ids, {multiple: true, name: 'check_ids[]', class: 'image-check-box', checked: true }, item_genre.item.id, false %>
+        <% end %>
+        <div class="image_tag">
+          <%= image_tag(item_genre.item.image, class: "item-img") if item_genre.item.image.attached? %>
+        </div>
+      </div>
+    </label>
+    <% end %>
+    <% end %>
+  </div>
+  <% end %>
+</div>
