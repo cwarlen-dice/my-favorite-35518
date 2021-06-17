@@ -1,7 +1,7 @@
 <%= render "shared/header" %>
 ジャンル未設定は設定できません<br />
 承認画像は最大５つまで選択できます<br />
-<%= form_with(model: @permit_image, url: user_permits_path(current_user.id), id: 'image-select', local: true) do |f| %>
+<%= form_with(model: @permit_image, url: create_user_permits_path(current_user.id), id: 'image-select', method: :post, local: true) do |f| %>
 
 <%= render 'shared/error_messages', model: f.object %>
 

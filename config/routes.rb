@@ -10,11 +10,12 @@ Rails.application.routes.draw do
     resources :message_rooms, only: %i[index create destroy] do
       resources :messages, only: %i[index create destroy]
     end
-    resources :permits, only: %i[new create] do
+    resources :permits, only: %i[new] do
       collection do
         get 'check', to: 'permits#check'
         get 'edit', to: 'permits#edit'
-        patch 'update', to: 'permits#update'
+        post 'create', as: 'create', to: 'permits#create'
+        patch 'update', as: 'update', to: 'permits#update'
       end
     end
   end

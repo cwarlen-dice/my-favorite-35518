@@ -10,9 +10,9 @@
 </div>
 <br />
 
-<% unless current_user.permit_images.blank? %>
-<%= link_to('設定済み：承認画像を変更する', new_user_permit_path(current_user.id)) %>
-<% else %>
+<% if current_user.permit_images.blank? %>
 <%= link_to('未設定：承認画像を設定する', new_user_permit_path(current_user.id)) %>
+<% else %>
+<%= link_to('設定済み：承認画像を変更する', edit_user_permits_path(current_user.id)) %>
 <% end %>
 <%= link_to(:チェック画面, check_user_permits_path(current_user.id)) %>
