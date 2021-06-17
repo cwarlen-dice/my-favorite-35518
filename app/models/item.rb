@@ -1,10 +1,14 @@
 class Item < ApplicationRecord
   has_one_attached :image, dependent: :destroy
-  has_many :item_genre_mts, dependent: :destroy
   belongs_to :user
   has_one :permit_image
+
   has_many :item_tag_mts, dependent: :destroy
   has_many :tags, through: :item_tag_mts
+
+  # has_many :item_genre_mts, dependent: :destroy
+  has_one :item_genre_mt, dependent: :destroy
+  has_one :genre, through: :item_genre_mt
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :genre, through: :item_genre_mts

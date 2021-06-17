@@ -1,9 +1,10 @@
 class ItemGenreMt < ApplicationRecord
   belongs_to :item
-  belongs_to :user
+  # belongs_to :user
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :genre, through: :item_genre_mts
+  # belongs_to :genre, through: :item_genre_mts
+  belongs_to :genre, through: :item_genre_mt
 end
 
 # == Schema Information

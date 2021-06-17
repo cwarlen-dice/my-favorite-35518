@@ -38,7 +38,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.includes(:item_genre_mts).includes(:tags).find(params[:id])
+    @item = Item.includes(:item_genre_mt).includes(:tags).find(params[:id])
     impressionist(@item) # PVカウントアップ
   end
 

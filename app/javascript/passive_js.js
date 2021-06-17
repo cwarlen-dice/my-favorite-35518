@@ -78,27 +78,31 @@ window.addEventListener('load', function () {
     });
   }
 
-  // permits#new > 認証画像送信
-  if (document.getElementById('image-select-sub')) {
-    let item_id = [];
-    const renderDom = document.getElementById('image-select');
-    const trigger = document.getElementById('image-select-sub');
-    trigger.addEventListener('click', function (e) {
-      e.preventDefault();
-      // 選択されたチェックボックスを取得
-      const elems = document.querySelectorAll('[name="permit_image[item_id]"]:checked');
-      elems.forEach(function (e) {
-        // チェックボックスのバリュー取得
-        const id = e.value;
-        // 隠しパラメータとして埋め込み要素作成
-        const idsObj = `<input value="${id}" name='item_ids[]' type="hidden">`;
-        // 埋め込み
-        renderDom.insertAdjacentHTML("beforeend", idsObj);
+  // permits#new > 認証画像チェック数
+  if (document.getElementById('image-select')) {
+    const trigger = document.querySelectorAll('input[type=checkbox]');
+    trigger.forEach(function (target) {
+      target.addEventListener('click', function () {
+        const count = document.querySelectorAll('input[type=checkbox]:checked').length;
+        if (count > 5) {
+          target.checked = false;
+        }
       });
-      // フォームをサブミット
-      renderDom.submit();
     });
+
   }
 
+  // permits#check > 認証画像選択チェックボックス
+  if (document.querySelectorAll('.image-check-box')) {
+    const trigger = document.querySelectorAll('.image-check-box');
+    trigger.forEach(function (target) {
+      target.addEventListener('click', function (e) {
+        const elems = this.closest("[class*=permit-checkbox]").querySelectorAll('.image-check-box');
+        elems.forEach(function (elem) {
+          if (target != elem) { elem.checked = false; }
+        });
+      });
+    });
+  }
 
 });

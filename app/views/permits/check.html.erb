@@ -1,3 +1,46 @@
 <%= render "shared/header" %>
 
-<%= image_tag asset_path('1701.png'), class: "message-image" %>
+<%= form_with(model: @permit_image, url: user_permit_path(current_user.id, current_user.permit_images[0].id), method: :PATCH, local: true) do |f| %>
+
+<div class="permit-images">
+  <% @smple_imgs.each_with_index do |s, num| %>
+  <div class="permit-checkbox-<%= num %>">
+    <% s[1].each do |i| %>
+    <div class="checkbox-image">
+      <label>
+        <% if i.is_a?(Integer) %>
+        <%= check_box :checkbox, :ids, {multiple: true, name: 'check_ids[]', class: 'image-check-box'}, i, false %>
+        <%= image_tag asset_path("genre/#{s[0]}/#{i}"), class: "parmit-image" %>
+        <% else %>
+        <%= f.check_box :ids, {multiple: true, name: 'check_ids[]', class: 'image-check-box'}, 0, false %>
+        <%= image_tag(i, class: "parmit-image") %>
+        <% end %>
+      </label>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+<br />
+<%= f.submit "submit" %>
+<% end %>
+
+
+<%
+=begin
+%>
+
+<%= form_with(model: @permit_image, url: user_permit_path(current_user.id, current_user.permit_images[0].id), method: :PATCH, local: true) do |f| %>
+<% @smple_imgs.each_with_index do |s, i| %>
+<%= check_box :checkbox, :ids, {multiple: true, name: 'ids[]'}, i, false %>
+<% end %>
+<%= f.submit "submit" %>
+<% end %>
+
+
+
+
+
+<%
+=end
+%>

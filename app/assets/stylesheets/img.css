@@ -21,3 +21,18 @@
 .image-check-box {
   position: absolute;
 }
+
+.parmit-image {
+  width: 100px;
+  height: 100px;
+}
+
+.permit-checkbox {
+  display: flex;
+  flex-direction: row;
+}
+
+.checkbox-image {
+  position: relative;
+  display: inline-block;
+}

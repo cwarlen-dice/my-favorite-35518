@@ -15,9 +15,10 @@ class PermitsController < ApplicationController
 
   def create
     items = []
-    params[:item_ids].each_with_index do |id, i|
-      items[i] = PermitImage.new(item_id: id, user_id: params[:user_id])
+    params[:check_ids].each do |id|
+      items << PermitImage.new(item_id: id, user_id: params[:user_id])
     end
+
     if items.map(&:valid?).all? # 全て登録できるか確認
       items.map(&:save).all? # 全ての値を保存
       redirect_to(permits_path) and return
@@ -32,8 +33,28 @@ class PermitsController < ApplicationController
     render :new
   end
 
+  def update
+    # tes = self.class.instance_variable_get(:@some_variable)
+    # tes = PermitsController.new.class.instance_variable_get(:@some_variable)
+    # binding.pry
+    redirect_to permits_path
+  end
+
   def check
+    @permit_image = PermitImage.new
+    permit_images = current_user.permit_images
+    @smple_imgs = []
+    permit_images.each do |i|
+      smple_img = [1, 2, 3]
+      smple_img << i.item.image
+      smple_img = smple_img.shuffle
+      @smple_imgs << [i.item.item_genre_mt.genre.id, smple_img]
+    end
+    # binding.pry
   end
 
   # private
+
+  # def check_tes
+  # end
 end

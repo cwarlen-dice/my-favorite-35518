@@ -9,6 +9,8 @@ class Genre < ActiveHash::Base
     { id: 6, data: '人物' }
   ]
   include ActiveHash::Associations
-  has_many :item_genre_mts
-  has_many :items, through: :item_genre_mts
+  # has_many :item_genre_mts
+  # has_many :items, through: :item_genre_mts
+  has_one :item_genre_mt
+  has_one :item, through: :item_genre_mt
 end
