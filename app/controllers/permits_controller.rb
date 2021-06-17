@@ -1,26 +1,24 @@
 class PermitsController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
   before_action :set_genre_data, only: %i[new create edit update]
-  before_action :items_create, only: %i[create update]
 
   def index
   end
 
   def new
-    # binding.pry
     @permit_image = PermitImage.new
   end
 
   def create
-    # items = []
-    # params[:check_ids].each do |id|
-    #   items << PermitImage.new(item_id: id, user_id: params[:user_id])
-    # end
-    if @items.map(&:valid?).all? # 全て登録できるか確認
-      @items.map(&:save).all? # 全ての値を保存
+    items = []
+    params[:check_ids].each do |id|
+      items << PermitImage.new(item_id: id, user_id: params[:user_id])
+    end
+    if items.map(&:valid?).all? # 全て登録できるか確認
+      items.map(&:save).all? # 全ての値を保存
       redirect_to(message_info_path) and return
     else
-      @permit_image = @items
+      @permit_image = items
       render :new
     end
   end
@@ -30,10 +28,12 @@ class PermitsController < ApplicationController
   end
 
   def update
-    # items = items_create(params[:check_ids])
-    binding.pry
-    @permit_image = @items
-    render :edit
+    if image_update
+      redirect_to(message_info_path)
+    else
+      @permit_image = @items
+      render :edit
+    end
   end
 
   def check
@@ -46,7 +46,6 @@ class PermitsController < ApplicationController
       smple_img = smple_img.shuffle
       @smple_imgs << [i.item.item_genre_mt.genre.id, smple_img]
     end
-    # binding.pry
   end
 
   private
@@ -57,10 +56,22 @@ class PermitsController < ApplicationController
     @item_genre = ItemGenreMt.find_by_sql(item_genre_sql)
   end
 
-  def items_create
-    @items = []
-    params[:check_ids].each do |id|
-      @items << PermitImage.new(item_id: id, user_id: params[:user_id])
+  def image_update
+    @items = ''
+    old_list = []
+    current_user.permit_images.each do |i|
+      old_list << i.item_id
+    end
+    new_list = params[:check_ids]
+    old_only = old_list - new_list
+    new_only = new_list - old_list
+    old_only.each do |id|
+      item = PermitImage.find_by(item_id: id)
+      @items << item unless item.destroy
+    end
+    new_only.each do |id|
+      item = PermitImage.new(item_id: id, user_id: params[:user_id])
+      @items << item unless item.save
     end
   end
 end
