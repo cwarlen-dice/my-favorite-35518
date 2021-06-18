@@ -9,35 +9,3 @@
 
 <%= f.submit "決定", id: 'image-select-sub' %>
 <% end %>
-
-<%
-=begin
-%>
-
-<div class="image-genre">
-  <% @genre.each do |g| %>
-  <div class="item-genre" id="item-genre-<%= g.genre_id %>" style="display: block;">
-    <%= Genre.data[g.genre_id][:data] if Genre.data[g.genre_id][:id] != 0%><br />
-    <% @item_genre.each do |item_genre| %>
-    <% next if item_genre.genre_id == 0 %>
-    <% if item_genre.genre_id == g.genre_id %>
-    <label>
-      <div class="image-checks">
-        <div class="image-check-box">
-          <%= f.check_box :ids, {multiple: true, name: 'check_ids[]'}, item_genre.item.id, false %>
-        </div>
-        <div class="image_tag">
-          <%= image_tag(item_genre.item.image, class: "item-img") if item_genre.item.image.attached? %>
-        </div>
-      </div>
-    </label>
-    <% end %>
-    <% end %>
-  </div>
-  <% end %>
-</div>
-
-
-<%
-=end
-%>

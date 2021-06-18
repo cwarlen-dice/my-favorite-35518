@@ -4,7 +4,7 @@
 <div class="select">
   <% unless @genre.nil? %>
   <%= 'ジャンル:' %>
-  <%= "#{@genre[:data]} 関連画像" %>
+  <%= "#{@genre.data} 関連画像" %>
   <% else %>
   <%= 'タグ:' %>
   <%= "#{@tag.name} 関連画像" %>

@@ -24,23 +24,3 @@
 <br />
 <%= f.submit "submit" %>
 <% end %>
-
-
-<%
-=begin
-%>
-
-<%= form_with(model: @permit_image, url: user_permit_path(current_user.id, current_user.permit_images[0].id), method: :PATCH, local: true) do |f| %>
-<% @smple_imgs.each_with_index do |s, i| %>
-<%= check_box :checkbox, :ids, {multiple: true, name: 'ids[]'}, i, false %>
-<% end %>
-<%= f.submit "submit" %>
-<% end %>
-
-
-
-
-
-<%
-=end
-%>
