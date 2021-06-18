@@ -27,6 +27,7 @@ end
 #                                Prefix Verb   URI Pattern                                                                              Controller#Action
 #                                  root GET    /                                                                                        items#index
 #                               selects GET    /selects(.:format)                                                                       items#select
+#                          message_info GET    /message_info(.:format)                                                                  permits#index
 #                      new_user_session GET    /users/sign_in(.:format)                                                                 devise/sessions#new
 #                          user_session POST   /users/sign_in(.:format)                                                                 devise/sessions#create
 #                  destroy_user_session DELETE /users/sign_out(.:format)                                                                devise/sessions#destroy
@@ -57,11 +58,17 @@ end
 #                             user_item GET    /users/:user_id/items/:id(.:format)                                                      items#show
 #                                       PATCH  /users/:user_id/items/:id(.:format)                                                      items#update
 #                                       PUT    /users/:user_id/items/:id(.:format)                                                      items#update
-#                    user_room_messages GET    /users/:user_id/rooms/:room_id/messages(.:format)                                        messages#index
-#                                       POST   /users/:user_id/rooms/:room_id/messages(.:format)                                        messages#create
-#                            user_rooms GET    /users/:user_id/rooms(.:format)                                                          rooms#index
-#                                       POST   /users/:user_id/rooms(.:format)                                                          rooms#create
-#                             user_room DELETE /users/:user_id/rooms/:id(.:format)                                                      rooms#destroy
+#            user_message_room_messages GET    /users/:user_id/message_rooms/:message_room_id/messages(.:format)                        messages#index
+#                                       POST   /users/:user_id/message_rooms/:message_room_id/messages(.:format)                        messages#create
+#             user_message_room_message DELETE /users/:user_id/message_rooms/:message_room_id/messages/:id(.:format)                    messages#destroy
+#                    user_message_rooms GET    /users/:user_id/message_rooms(.:format)                                                  message_rooms#index
+#                                       POST   /users/:user_id/message_rooms(.:format)                                                  message_rooms#create
+#                     user_message_room DELETE /users/:user_id/message_rooms/:id(.:format)                                              message_rooms#destroy
+#                    check_user_permits GET    /users/:user_id/permits/check(.:format)                                                  permits#check
+#                     edit_user_permits GET    /users/:user_id/permits/edit(.:format)                                                   permits#edit
+#                   create_user_permits POST   /users/:user_id/permits/create(.:format)                                                 permits#create
+#                   update_user_permits PATCH  /users/:user_id/permits/update(.:format)                                                 permits#update
+#                       new_user_permit GET    /users/:user_id/permits/new(.:format)                                                    permits#new
 #                             edit_user GET    /users/:id/edit(.:format)                                                                users#edit
 #                                  user GET    /users/:id(.:format)                                                                     users#show
 #                                       PATCH  /users/:id(.:format)                                                                     users#update
