@@ -6,7 +6,7 @@
 </div><br />
 <div class="genre">
   <%= "ジャンル："%>
-  <%= link_to(Genre.data[@item.item_genre_mt.genre_id][:data], selects_path(genre: Genre.data[@item.item_genre_mt.genre_id][:data])) %>
+  <%= link_to(@item.item_genre_mt.genre.data, selects_path(genre: @item.item_genre_mt.genre.data)) %>
 </div><br />
 <div class="tag-list">
   <%= "タグ:" %><br />
