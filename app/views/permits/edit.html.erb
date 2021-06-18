@@ -5,7 +5,8 @@
 
 <%= render 'shared/error_messages', model: f.object %>
 
-<%= render partial: 'shared/permit_images', locals: {item_genre: @item_genre, f: f} %>
+<%#= render partial: 'shared/permit_images', locals: {item_genre: @item_genre, f: f} %>
+<%= render partial: 'shared/permit_images', locals: {genres: @genres, item_genre: @item_genre, f: f} %>
 
 <%= f.submit "更新", id: 'image-select-sub' %>
 <% end %>

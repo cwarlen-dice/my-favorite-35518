@@ -11,16 +11,18 @@ class PermitsController < ApplicationController
 
   def create
     items = []
-    params[:check_ids].each do |id|
-      items << PermitImage.new(item_id: id, user_id: params[:user_id])
-    end
-    if items.map(&:valid?).all? # 全て登録できるか確認
-      items.map(&:save).all? # 全ての値を保存
-      redirect_to(message_info_path) and return
+    ids = params[:check_ids]
+    if ids.blank?
+      items << PermitImage.new(item_id: '', user_id: params[:user_id])
     else
-      @permit_image = items
-      render :new
+      ids.each do |id|
+        items << PermitImage.new(item_id: id, user_id: params[:user_id])
+      end
     end
+    redirect_to(message_info_path) and return if items.map(&:save).all? # 全ての値を保存
+
+    @permit_image = items
+    render :new
   end
 
   def edit
@@ -54,6 +56,8 @@ class PermitsController < ApplicationController
     @user = User.find(params[:user_id])
     item_genre_sql = "SELECT * FROM item_genre_mts WHERE user_id=#{@user.id} ORDER BY genre_id ASC, updated_at DESC"
     @item_genre = ItemGenreMt.find_by_sql(item_genre_sql)
+    genre_sql = "SELECT DISTINCT genre_id FROM item_genre_mts WHERE user_id=#{@user.id} ORDER BY genre_id ASC"
+    @genres = ItemGenreMt.find_by_sql(genre_sql)
   end
 
   def image_update
@@ -63,6 +67,7 @@ class PermitsController < ApplicationController
       old_list << i.item_id
     end
     new_list = params[:check_ids]
+    new_list = [] if new_list.blank?
     old_only = old_list - new_list
     new_only = new_list - old_list
     old_only.each do |id|

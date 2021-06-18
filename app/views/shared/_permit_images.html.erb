@@ -1,10 +1,10 @@
 <div class="image-genre">
-  <% Genre.all.each do |g| %>
-  <div class="item-genre" id="item-genre-<%= g.id %>" style="display: block;">
-    <%= g.data if g.id != 0 %><br />
+  <% genres.each do |genreMT| %>
+  <div class="item-genre" id="item-genre-<%= genreMT.genre.id %>" style="display: block;">
+    <%= genreMT.genre.data if genreMT.genre.id != 0 %><br />
     <% item_genre.each do |item_genre| %>
     <% next if item_genre.genre_id == 0 %>
-    <% if item_genre.genre_id == g.id %>
+    <% if item_genre.genre_id == genreMT.genre.id %>
     <label>
       <div class="image-checks">
         <% if item_genre.item.permit_image.blank? %>
