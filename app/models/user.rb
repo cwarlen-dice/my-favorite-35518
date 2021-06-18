@@ -27,8 +27,6 @@ class User < ApplicationRecord
   has_one_attached :image
   has_many :items
   has_many :permit_images
-  # has_many :item_genre_mts
-  # has_one :item_genre_mt
   has_many :room_users
   has_many :rooms, through: :room_users
   has_many :messages

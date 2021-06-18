@@ -4,7 +4,7 @@
 <div id="profile" style="display: none;">
   <%= "誕生日：#{@user.birthday}" %><br />
   血液型：
-  <%= @user.blood_type[:data] unless @user.blood_type.blank? || @user.blood_type_id.zero? %>
+  <%= @user.blood_type.data unless @user.blood_type.blank? || @user.blood_type_id.zero? %>
   <br />
   <%= "プロフィール：#{@user.profile}" %><br />
   プロフィール画像：<br />
@@ -22,15 +22,15 @@
 <%= "PV数：#{@user.impressions_count }"%>
 投稿一覧
 <%= form_with(url: '#', local: false) do |f| %>
-<%= f.collection_select(:genre_id, Genre.all, :id, :data, { prompt: 'フィルターなし' }, {class:"select-box-genre-sort", id:"item-genre-sort", :onchange => "this.id = \"item-genre-sort-\"+this.value"}) %>
+<%= f.collection_select(:genre_id, Genre.all, :id, :data, { prompt: 'フィルターなし' }, { class: "select-box-genre-sort", id: "item-genre-sort", onchange: "this.id = \"item-genre-sort-\"+this.value"}) %>
 <% end %>
 ジャンル
 <div class="image-genre">
-  <% @genre.each do |g| %>
-  <div class="item-genre" id="item-genre-<%= g.genre_id %>" style="display: block;">
-    <%= Genre.data[g.genre_id][:data] %>
+  <% @genres.each do |genreMT| %>
+  <div class="item-genre" id="item-genre-<%= genreMT.genre.id %>" style="display: block;">
+    <%= genreMT.genre.data %>
     <% @item_genre.each do |item_genre| %>
-    <% if item_genre.genre_id == g.genre_id %>
+    <% if item_genre.genre_id == genreMT.genre.id %>
     <% if !current_user.nil? && item_genre.user_id == current_user.id %>
     <%= link_to edit_user_item_path(item_genre.user_id, item_genre.item_id) do %>
     <div class="image_tag">
