@@ -1,6 +1,7 @@
 <%= render "shared/header" %>
 
-<%= form_with(model: @permit_image, url: user_permit_path(current_user.id, current_user.permit_images[0].id), method: :PATCH, local: true) do |f| %>
+<%#= form_with(model: @permit_image, url: user_permit_path(current_user.id, current_user.permit_images[0].id), method: :PATCH, local: true) do |f| %>
+<%= form_with(model: @permit_image, url: '#check_user_permits_path(user)', method: :post, local: true) do |f| %>
 
 <div class="permit-images">
   <% @smple_imgs.each_with_index do |s, num| %>

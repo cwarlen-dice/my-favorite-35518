@@ -12,7 +12,8 @@ Rails.application.routes.draw do
     end
     resources :permits, only: %i[new] do
       collection do
-        get 'check', to: 'permits#check'
+        get 'permit_select', to: 'permits#permit_select'
+        post 'check', to: 'permits#check'
         get 'edit', to: 'permits#edit'
         post 'create', as: 'create', to: 'permits#create'
         patch 'update', as: 'update', to: 'permits#update'
@@ -64,7 +65,8 @@ end
 #                    user_message_rooms GET    /users/:user_id/message_rooms(.:format)                                                  message_rooms#index
 #                                       POST   /users/:user_id/message_rooms(.:format)                                                  message_rooms#create
 #                     user_message_room DELETE /users/:user_id/message_rooms/:id(.:format)                                              message_rooms#destroy
-#                    check_user_permits GET    /users/:user_id/permits/check(.:format)                                                  permits#check
+#            permit_select_user_permits GET    /users/:user_id/permits/permit_select(.:format)                                          permits#permit_select
+#                    check_user_permits POST   /users/:user_id/permits/check(.:format)                                                  permits#check
 #                     edit_user_permits GET    /users/:user_id/permits/edit(.:format)                                                   permits#edit
 #                   create_user_permits POST   /users/:user_id/permits/create(.:format)                                                 permits#create
 #                   update_user_permits PATCH  /users/:user_id/permits/update(.:format)                                                 permits#update

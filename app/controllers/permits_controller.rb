@@ -38,7 +38,7 @@ class PermitsController < ApplicationController
     end
   end
 
-  def check
+  def permit_select
     @permit_image = PermitImage.new
     permit_images = current_user.permit_images
     @smple_imgs = []
@@ -48,6 +48,9 @@ class PermitsController < ApplicationController
       smple_img = smple_img.shuffle
       @smple_imgs << [i.item.item_genre_mt.genre.id, smple_img]
     end
+  end
+
+  def check
   end
 
   private

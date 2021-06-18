@@ -8,9 +8,10 @@
   <% if show? %>
   <% if @user.nil? || @user.id == current_user.id %>
   <%= link_to(:編集, edit_user_path(current_user.id)) %>
-  <%= link_to(:メッセージ確認, user_message_rooms_path(current_user.id)) %>
+  <%= link_to(:メッセージ確認, user_message_rooms_path(current_user.id)) unless current_user.permit_images.blank?%>
   <% else %>
-  <%= link_to(:メッセージを送る, user_message_rooms_path(@user.id), method: :post) %>
+  <%= link_to("#{current_user.nickname}:マイページ", user_path(current_user.id)) %>
+  <%= link_to(:メッセージを送る, user_message_rooms_path(@user.id), method: :post) unless current_user.permit_images.blank?%>
   <% end %>
   <% end %>
   <%= link_to(:メッセージ機能について, message_info_path, method: :get) %>
