@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   resources :items, only: %i[index]
   resources :users, only: %i[show edit update] do
     resources :items, only: %i[create new show edit update]
-    resources :message_rooms, only: %i[index create destroy] do
+    resources :message_rooms, only: %i[index destroy] do
+      collection do
+        get 'create', to: 'message_rooms#create'
+      end
       resources :messages, only: %i[index create destroy]
     end
     resources :permits, only: %i[new] do

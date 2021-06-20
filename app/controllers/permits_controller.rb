@@ -39,18 +39,34 @@ class PermitsController < ApplicationController
   end
 
   def permit_select
-    @permit_image = PermitImage.new
-    permit_images = current_user.permit_images
+    @is_room = room_check(params[:user_id])
+    redirect_to(user_message_rooms_path(params[:user_id])) and return unless @is_room.blank?
+
+    @user = User.find(params[:user_id])
+    # # @permit_image = PermitImage.new
+    # ids = []
+    # permit_images = @user.permit_images
+    # @smple_imgs = []
+    # permit_images.each do |i|
+    #   smple_img = [1, 2, 3]
+    #   smple_img << i.item.image
+    #   smple_img = smple_img.shuffle
+    #   @smple_imgs << [i.item.item_genre_mt.genre.id, smple_img]
+    # end
+
+    ids = []
+    @user.permit_images.each { |img| ids << img.item_id }
+    id_conut = ids.length
+    digits = ids.max.to_s.length
+    range = 10 * (10**digits)
+    rand_num = (1..range).to_a.sample(3 * id_conut)
+    replace_num(ids, range, rand_num) unless (ids & rand_num).blank?
     @smple_imgs = []
-    permit_images.each do |i|
-      smple_img = [1, 2, 3]
-      smple_img << i.item.image
-      smple_img = smple_img.shuffle
-      @smple_imgs << [i.item.item_genre_mt.genre.id, smple_img]
-    end
+    # binding.pry
   end
 
   def check
+    # binding.pry
   end
 
   private
@@ -80,6 +96,16 @@ class PermitsController < ApplicationController
     new_only.each do |id|
       item = PermitImage.new(item_id: id, user_id: params[:user_id])
       @items << item unless item.save
+    end
+  end
+
+  def replace_num(ids, range, rand_num)
+    common = ids & rand_num
+    common.each do |num|
+      rand_num.delete(num)
+      add_num = rand(range)
+      add_num = rand(range) while rand_num.include?(add_num) || ids.include?(add_num)
+      rand_num.push(add_num) unless rand_num.include?(add_num)
     end
   end
 end

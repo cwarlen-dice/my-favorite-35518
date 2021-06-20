@@ -6,14 +6,7 @@ class MessageRoomsController < ApplicationController
   end
 
   def create
-    @is_room = ''
-    current_user_entry = RoomUser.where(user_id: current_user.id)
-    user_entry = RoomUser.where(user_id: params[:user_id])
-    current_user_entry.each do |cu|
-      user_entry.each do |u|
-        @is_room = cu.room_id if cu.room_id == u.room_id
-      end
-    end
+    @is_room = room_check(params[:user_id])
 
     redirect_to user_message_room_messages_path(current_user.id, @is_room) and return unless @is_room.blank?
 

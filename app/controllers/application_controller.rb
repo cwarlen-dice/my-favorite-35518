@@ -20,6 +20,18 @@ class ApplicationController < ActionController::Base
     user_path(resource.id) # ログイン後に遷移するpathを設定
   end
 
+  def room_check(send_id)
+    is_room = ''
+    current_user_entry = RoomUser.where(user_id: current_user.id)
+    user_entry = RoomUser.where(user_id: send_id)
+    current_user_entry.each do |cu|
+      user_entry.each do |u|
+        is_room = cu.room_id if cu.room_id == u.room_id
+      end
+    end
+    is_room
+  end
+
   def index?
     action_name == 'index'
   end
