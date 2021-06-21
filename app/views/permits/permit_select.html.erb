@@ -4,17 +4,19 @@
 <%= form_with(url: check_user_permits_path(current_user.id), method: :post, local: true) do |f| %>
 
 <div class="permit-images">
-  <% @smple_imgs.each_with_index do |s, num| %>
+  <% @smple_imgs.each_with_index do |item, num| %>
   <div class="permit-checkbox-<%= num %>">
-    <% s[1].each do |i| %>
+    <% sample_num = 1  %>
+    <% item[1].each do |id| %>
     <div class="checkbox-image">
       <label>
-        <% if i.is_a?(Integer) %>
-        <%= check_box :checkbox, :ids, {multiple: true, name: 'check_ids[]', class: 'image-check-box'}, i, false %>
-        <%= image_tag asset_path("genre/#{s[0]}/#{i}"), class: "parmit-image" %>
+        <% if id.is_a?(Integer) %>
+        <% sample_num += 1 %>
+        <%= f.check_box :ids, {multiple: true, name: 'check_ids[]', class: 'image-check-box'}, id, false %>
+        <%= image_tag asset_path("genre/#{item[0]}/#{sample_num}"), class: "parmit-image" %>
         <% else %>
-        <%= f.check_box :ids, {multiple: true, name: 'check_ids[]', class: 'image-check-box'}, 0, false %>
-        <%= image_tag(i, class: "parmit-image") %>
+        <%= f.check_box :ids, {multiple: true, name: 'check_ids[]', class: 'image-check-box'}, id.to_i, false %>
+        <%= image_tag('#', class: "parmit-image") %>
         <% end %>
       </label>
     </div>
