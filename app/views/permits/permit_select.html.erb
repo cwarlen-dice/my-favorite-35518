@@ -1,7 +1,6 @@
 <%= render "shared/header" %>
 
-<%#= form_with(model: @permit_image, url: check_user_permits_path(current_user.id), method: :post, local: true) do |f| %>
-<%= form_with(url: check_user_permits_path(current_user.id), method: :post, local: true) do |f| %>
+<%= form_with(url: check_user_permits_path(@user.id), method: :post, local: true) do |f| %>
 
 <div class="permit-images">
   <% @smple_imgs.each_with_index do |item, num| %>
@@ -11,12 +10,12 @@
     <div class="checkbox-image">
       <label>
         <% if id.is_a?(Integer) %>
-        <% sample_num += 1 %>
         <%= f.check_box :ids, {multiple: true, name: 'check_ids[]', class: 'image-check-box'}, id, false %>
         <%= image_tag asset_path("genre/#{item[0]}/#{sample_num}"), class: "parmit-image" %>
+        <% sample_num += 1 %>
         <% else %>
-        <%= f.check_box :ids, {multiple: true, name: 'check_ids[]', class: 'image-check-box'}, id.to_i, false %>
-        <%= image_tag('#', class: "parmit-image") %>
+        <%= f.check_box :ids, {multiple: true, name: 'check_ids[]', class: 'image-check-box'}, id.item_id, false %>
+        <%= image_tag(id.item.image, class: "parmit-image") %>
         <% end %>
       </label>
     </div>

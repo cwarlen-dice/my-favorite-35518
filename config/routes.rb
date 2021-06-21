@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   resources :items, only: %i[index]
   resources :users, only: %i[show edit update] do
     resources :items, only: %i[create new show edit update]
-    resources :message_rooms, only: %i[index destroy] do
+    resources :message_rooms, only: %i[destroy] do
       collection do
-        get 'create', to: 'message_rooms#create'
+        get 'index', to: 'message_rooms#index'
+        get 'create', to: 'message_rooms#create', as: 'create'
       end
       resources :messages, only: %i[index create destroy]
     end
@@ -18,8 +19,8 @@ Rails.application.routes.draw do
         get 'permit_select', to: 'permits#permit_select'
         post 'check', to: 'permits#check'
         get 'edit', to: 'permits#edit'
-        post 'create', as: 'create', to: 'permits#create'
-        patch 'update', as: 'update', to: 'permits#update'
+        post 'create', to: 'permits#create', as: 'create'
+        patch 'update', to: 'permits#update', as: 'update'
       end
     end
   end
