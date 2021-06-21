@@ -1,7 +1,6 @@
 class PermitsController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
   before_action :set_genre_data, only: %i[new create edit update]
-  # before_action :set_images, only: %i[permit_select check]
 
   def index
   end
@@ -100,15 +99,16 @@ class PermitsController < ApplicationController
 
   def get_images(send_id)
     @ids = []
+    return if @ids.blank?
+
     @user = User.find(send_id)
     @images = @user.permit_images.each { |img| @ids << img.item_id }
-
     id_conut = @ids.length
     digits = @ids.max.to_s.length
     range = 10 * (10**digits)
     rand_num = (1..range).to_a.sample(3 * id_conut)
     replace_num(@ids, range, rand_num) unless (@ids & rand_num).blank?
-    @smple_imgs = rand_num.each_slice(id_conut).to_a
+    @smple_imgs = rand_num.each_slice(id_conut).to_a if id_conut >= 1
     @smple_imgs.each_with_index do |smple_img, i|
       smple_img << @images[i]
       smple_img.shuffle!

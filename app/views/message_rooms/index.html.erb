@@ -6,9 +6,8 @@
   <% rmt.room.users.each do |u| %>
   <% if current_user.id != u.id %>
   <div class="menber">
-    <%= link_to(u.nickname, user_message_room_messages_path(current_user.id, rmt.room_id), method: :get) %>
-    <%= link_to('execute', user_message_room_path(current_user.id, rmt.room_id), method: :delete, style: "display: none;", onclick: 'this.parentNode.remove()') %>
-    <%= link_to('✕', 'javascript:void(0);', class: "user-del") %>
+    <%= link_to('✕', user_message_room_path(current_user.id, rmt.room_id), class: "user-del") %>
+    <%= link_to(u.nickname, user_message_room_messages_path(current_user.id, rmt.room_id)) %>
   </div>
   <% end %>
   <% end %>

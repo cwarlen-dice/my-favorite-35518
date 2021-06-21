@@ -72,7 +72,13 @@ window.addEventListener('load', function () {
       target.addEventListener('click', function (e) {
         e.preventDefault();
         if (window.confirm('ユーザーをリストから削除すると、そのユーザーとの全てのメッセージも削除されます。\n本当によろしいですね？')) {
-          this.previousElementSibling.click();
+          // 削除用要素の生成
+          const tagElem = document.createElement('a');
+          tagElem.setAttribute('href', this.href);
+          tagElem.setAttribute('data-method', 'delete');
+          const elem = this.parentNode.appendChild(tagElem);
+          elem.click();
+          this.parentNode.remove();
         }
       });
     });
