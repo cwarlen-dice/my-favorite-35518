@@ -42,26 +42,20 @@ class PermitsController < ApplicationController
     @is_room = room_check(params[:user_id])
     redirect_to(user_message_rooms_path(params[:user_id])) and return unless @is_room.blank?
 
-    @user = User.find(params[:user_id])
-    # # @permit_image = PermitImage.new
-    # ids = []
-    # permit_images = @user.permit_images
-    # @smple_imgs = []
-    # permit_images.each do |i|
-    #   smple_img = [1, 2, 3]
-    #   smple_img << i.item.image
-    #   smple_img = smple_img.shuffle
-    #   @smple_imgs << [i.item.item_genre_mt.genre.id, smple_img]
-    # end
-
     ids = []
+    @user = User.find(params[:user_id])
     @user.permit_images.each { |img| ids << img.item_id }
     id_conut = ids.length
     digits = ids.max.to_s.length
     range = 10 * (10**digits)
     rand_num = (1..range).to_a.sample(3 * id_conut)
     replace_num(ids, range, rand_num) unless (ids & rand_num).blank?
-    @smple_imgs = []
+    @smple_imgs = rand_num.each_slice(id_conut).to_a
+    @smple_imgs.each_with_index do |smple_img, i|
+      smple_img << ids[i]
+      smple_img.shuffle!
+    end
+
     # binding.pry
   end
 
