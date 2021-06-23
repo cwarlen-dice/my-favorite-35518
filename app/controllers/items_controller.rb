@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.includes(:item_genre_mt).includes(:tags).find(params[:id])
-    impressionist(@item) # PVカウントアップ
+    impressionist(@item) if @item.user_id != current_user.id # PVカウントアップ
   end
 
   def select

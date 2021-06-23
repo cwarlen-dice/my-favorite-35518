@@ -39,6 +39,7 @@ class PermitsController < ApplicationController
   end
 
   def permit_select
+    @user = User.find(params[:user_id])
     @is_room = room_check(params[:user_id])
     if @is_room.blank?
       get_images(params[:user_id])
@@ -99,16 +100,16 @@ class PermitsController < ApplicationController
 
   def get_images(send_id)
     @ids = []
-    return if @ids.blank?
-
     @user = User.find(send_id)
     @images = @user.permit_images.each { |img| @ids << img.item_id }
+    return if @ids.blank?
+
     id_conut = @ids.length
     digits = @ids.max.to_s.length
     range = 10 * (10**digits)
     rand_num = (1..range).to_a.sample(3 * id_conut)
     replace_num(@ids, range, rand_num) unless (@ids & rand_num).blank?
-    @smple_imgs = rand_num.each_slice(id_conut).to_a if id_conut >= 1
+    @smple_imgs = rand_num.each_slice(3).to_a
     @smple_imgs.each_with_index do |smple_img, i|
       smple_img << @images[i]
       smple_img.shuffle!
