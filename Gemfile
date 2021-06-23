@@ -63,7 +63,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'active_hash'
-gem 'aws-sdk-s3', require: false
+gem 'aws-sdk-s3', require: false # 3S
 gem 'devise'
 gem 'image_processing', '~> 1.2' # 画像関連
 gem 'impressionist' # PVカウンター
