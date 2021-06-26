@@ -4,11 +4,14 @@ window.addEventListener('load', function () {
   if (document.getElementById('edit-btn')) {
     document.getElementById('edit-btn').addEventListener('click', function () {
       const elem = document.getElementById('profile');
+      // console.log(e.object);
       if (elem.style.display == "block") {
         // noneで非表示
+        this.innerText = "プロフィール表示[+]";
         elem.style.display = "none";
       } else {
         // blockで表示
+        this.innerText = "プロフィール表示[-]";
         elem.style.display = "block";
       }
     });
