@@ -36,9 +36,13 @@ class ApplicationController < ActionController::Base
     action_name == 'index'
   end
 
+  def edit?
+    action_name == 'show'
+  end
+
   def show?
     action_name == 'show'
   end
 
-  helper_method :index?, :show?
+  helper_method :index?, :edit?, :show?
 end

@@ -2,19 +2,21 @@
     <div class="header-menu d-flex justify-content-between">
       <ul class="h6 d-flex">
         <% if user_signed_in? %>
-        <% if index? %>
-        <li class="border border-dark p-1"><%= link_to("#{current_user.nickname}:マイページ", user_path(current_user.id), class: "text-decoration-none") %></li>
-        <% else %>
+        <% unless controller.controller_name == 'items' && index? %>
         <li class="border border-dark p-1"><%= link_to(:トップページ, root_path, class: "text-decoration-none") %></li>
         <% end %>
-        <% if show? %>
         <% if @user.nil? || @user.id == current_user.id %>
-        <li class="border border-dark p-1"><%= link_to(:編集, edit_user_path(current_user.id), class: "text-decoration-none") %></li>
-        <li class="border border-dark p-1"><%= link_to(:メッセージ確認, user_message_rooms_path(current_user.id), class: "text-decoration-none") unless current_user.permit_images.blank?%></li>
+        <% unless show? %>
+        <li class="border border-dark p-1"><%= link_to("#{current_user.nickname}:マイページ", user_path(current_user.id), class: "text-decoration-none") %></li>
+        <% else %>
+        <li class="border border-dark p-1"><%= link_to(:プロフィール編集, edit_user_path(current_user.id), class: "text-decoration-none") %></li>
+        <% end %>
+        <% unless current_user.permit_images.blank? %>
+        <li class="border border-dark p-1"><%= link_to(:メッセージ確認, user_message_rooms_path(current_user.id), class: "text-decoration-none") %></li>
+        <% end %>
         <% else %>
         <li class="border border-dark p-1"><%= link_to("#{current_user.nickname}:マイページ", user_path(current_user.id), class: "text-decoration-none") %></li>
         <li class="border border-dark p-1"><%= link_to(:メッセージを送る, permit_select_user_permits_path(@user.id), class: "text-decoration-none") unless current_user.permit_images.blank? || @user.permit_images.blank? %></li>
-        <% end %>
         <% end %>
       </ul>
       <ul class="h6 d-flex">
