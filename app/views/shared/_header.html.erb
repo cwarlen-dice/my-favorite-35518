@@ -1,27 +1,29 @@
-<div class="header my-1 p-1">
-  <header>
-    <% if user_signed_in? %>
-    <% if index? %>
-    <%= link_to("#{current_user.nickname}:マイページ", user_path(current_user.id)) %>
-    <% else %>
-    <%= link_to(:トップページ, root_path) %>
-    <% end %>
-    <% if show? %>
-    <% if @user.nil? || @user.id == current_user.id %>
-    <%= link_to(:編集, edit_user_path(current_user.id)) %>
-    <%= link_to(:メッセージ確認, user_message_rooms_path(current_user.id)) unless current_user.permit_images.blank?%>
-    <% else %>
-    <%= link_to("#{current_user.nickname}:マイページ", user_path(current_user.id)) %>
-    <%= link_to(:メッセージを送る, permit_select_user_permits_path(@user.id)) unless current_user.permit_images.blank? || @user.permit_images.blank? %>
-    <% end %>
-    <% end %>
-    <%= link_to(:メッセージ機能について, message_info_path, method: :get) %>
-    <%= link_to(:ログアウト, destroy_user_session_path, method: :delete) %>
-    <% else %>
-    <%= link_to(:ログイン, new_user_session_path, class: "rounded bg-primary p-1 text-white text-decoration-none h6") %>
-    <%= link_to(:新規登録, new_user_registration_path, class: "rounded bg-primary p-1 text-white text-decoration-none h6") %>
-    <% end %><br />
-    <%= "#{controller.controller_name}:#{controller.action_name}"%>
-    <br />
+  <header class="p-1">
+    <div class="header-menu d-flex justify-content-between">
+      <ul class="h6 d-flex">
+        <% if user_signed_in? %>
+        <% if index? %>
+        <li class="border border-dark p-1"><%= link_to("#{current_user.nickname}:マイページ", user_path(current_user.id), class: "text-decoration-none") %></li>
+        <% else %>
+        <li class="border border-dark p-1"><%= link_to(:トップページ, root_path, class: "text-decoration-none") %></li>
+        <% end %>
+        <% if show? %>
+        <% if @user.nil? || @user.id == current_user.id %>
+        <li class="border border-dark p-1"><%= link_to(:編集, edit_user_path(current_user.id), class: "text-decoration-none") %></li>
+        <li class="border border-dark p-1"><%= link_to(:メッセージ確認, user_message_rooms_path(current_user.id), class: "text-decoration-none") unless current_user.permit_images.blank?%></li>
+        <% else %>
+        <li class="border border-dark p-1"><%= link_to("#{current_user.nickname}:マイページ", user_path(current_user.id), class: "text-decoration-none") %></li>
+        <li class="border border-dark p-1"><%= link_to(:メッセージを送る, permit_select_user_permits_path(@user.id), class: "text-decoration-none") unless current_user.permit_images.blank? || @user.permit_images.blank? %></li>
+        <% end %>
+        <% end %>
+      </ul>
+      <ul class="h6 d-flex">
+        <li class="border border-dark p-1"><%= link_to(:メッセージ機能について, message_info_path, class: "text-decoration-none", method: :get) %></li>
+        <li class="border border-dark p-1"><%= link_to(:ログアウト, destroy_user_session_path, class: "text-decoration-none", method: :delete) %></li>
+      </ul>
+      <% else %>
+      <%= link_to(:ログイン, new_user_session_path, class: "rounded bg-primary p-1 text-white text-decoration-none h6") %>
+      <%= link_to(:新規登録, new_user_registration_path, class: "rounded bg-primary p-1 text-white text-decoration-none h6") %>
+      <% end %>
+    </div>
   </header>
-</div>

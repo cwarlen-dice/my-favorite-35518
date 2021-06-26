@@ -1,5 +1,10 @@
 /* 要素サイズ指定 */
 
+.bg-grey {
+  background-color: grey;
+}
+/* 要素サイズ指定 */
+
 .ws-350 {
   width: 400px;
 }
