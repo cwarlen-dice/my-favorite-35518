@@ -1,8 +1,11 @@
 <%= render "shared/header" %>
 
-<%= form_with(model: @user, url: user_path(@user.id), local: true) do |f| %>
-  <%= f.label :birthday %><br />
-  <%= raw sprintf(
+<div class="vh-100 d-flex justify-content-center ft-15 ">
+  <%= form_with(model: @user, url: user_path(@user.id), local: true, html: {class: "edit-form ws-350"}) do |f| %>
+  <div class="birthday">
+    <%= f.label :birthday %><br />
+    <div class="d-flex">
+      <%= raw sprintf(
             f.date_select(
               :birthday,
               use_month_numbers: true,
@@ -11,12 +14,22 @@
               end_year: 1930,
               date_separator: '%s'),
             "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
-
-  <%= f.label :blood_type %><br />
-  <%= f.collection_select(:blood_type_id, BloodType.all, :id, :data, {}, {class:"select-box", id:"item-blood_type"}) %><br />
-  <%= f.label :profile %><br />
-  <%= f.text_area :profile %><br />
-  <%= f.label :プロフィール画像 %><br />
-  <%= f.file_field :image, accept: 'image/jpg,image/jpeg,image/png' %><br />
-  <%= f.submit "更新" %>
-<% end %>
+    </div>
+  </div>
+  <div class="blood_type mt-1">
+    <%= f.label :blood_type %><br />
+    <%= f.collection_select(:blood_type_id, BloodType.all, :id, :data, {}, {class:"select-box", id:"item-blood_type"}) %>
+  </div>
+  <div class="profile mt-1">
+    <%= f.label :profile %><br />
+    <%= f.text_area :profile, class: "w-100" %>
+  </div>
+  <div class="profile-image mt-1">
+    <%= f.label :プロフィール画像 %><br />
+    <%= f.file_field :image, accept: 'image/jpg,image/jpeg,image/png' %>
+  </div>
+  <div class="actions mt-1">
+    <%= link_to("更新", 'javascript:void(0);', class: "btn btn-primary text-decoration-none text-white", onclick: "document.querySelector('.edit-form').submit();") %>
+  </div>
+  <% end %>
+</div>
