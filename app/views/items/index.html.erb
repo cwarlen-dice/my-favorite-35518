@@ -1,10 +1,37 @@
 <%= render "shared/header" %>
 
-<p class="text-danger">bootstrap</p>
-<p id="tes">jquery</p>
+<div class="px-3 ft-15">
+  みんなの投稿<br />
+  ジャンル
+  <div class="select">
+    <%= collection_select(:genre, :id, Genre.all, :id, :data, { prompt: 'フィルターなし' }, {}) %>
+  </div>
 
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("[id='tes']").text("jquery成功！！");
-  });
-</script>
+  <div class="image-genre">
+    <% @genres.each do |genreMT| %>
+    <% count = 0 %>
+    <div class="item-genre" id="item-genre-<%= genreMT.genre.id %>" style="display: block;">
+      <div class="genre"><%= genreMT.genre.data %></div>
+      <div class="genre-images d-flex">
+        <% @item_genre.each do |item_genre| %>
+        <% if item_genre.genre_id == genreMT.genre.id %>
+        <% count += 1 %>
+        <% break if count > 5 %>
+        <div class="image_tag p-1">
+          <% if !current_user.nil? && item_genre.user_id == current_user.id %>
+          <%= link_to edit_user_item_path(item_genre.user_id, item_genre.item_id) do %>
+          <%= image_tag(item_genre.item.image, class: "item-img ms-1") if item_genre.item.image.attached? %>
+          <% end %>
+          <% else %>
+          <%= link_to user_item_path(item_genre.user_id, item_genre.item_id) do %>
+          <%= image_tag(item_genre.item.image, class: "item-img") if item_genre.item.image.attached? %>
+          <% end %>
+        </div>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

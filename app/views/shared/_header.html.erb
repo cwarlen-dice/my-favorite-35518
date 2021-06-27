@@ -24,8 +24,10 @@
         <li class="border border-dark p-1"><%= link_to(:ログアウト, destroy_user_session_path, class: "text-decoration-none", method: :delete) %></li>
       </ul>
       <% else %>
-      <%= link_to(:ログイン, new_user_session_path, class: "rounded bg-primary p-1 text-white text-decoration-none h6") %>
-      <%= link_to(:新規登録, new_user_registration_path, class: "rounded bg-primary p-1 text-white text-decoration-none h6") %>
+      <ul class="h6 d-flex">
+        <li class="rounded bg-primary p-1"><%= link_to(:ログイン, new_user_session_path, class: "text-white text-decoration-none") %></li>
+        <li class="rounded bg-primary p-1 ms-1"><%= link_to(:新規登録, new_user_registration_path, class: "text-white text-decoration-none") %></li>
+      </ul>
       <% end %>
     </div>
     <div class=""><%= "#{controller.controller_name}:#{controller.action_name}"%></div>

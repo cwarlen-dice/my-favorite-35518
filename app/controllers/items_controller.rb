@@ -6,6 +6,10 @@ class ItemsController < ApplicationController
   before_action :set_one_item, only: %i[edit update]
 
   def index
+    genre_sql = 'SELECT DISTINCT genre_id FROM item_genre_mts ORDER BY genre_id ASC'
+    @genres = ItemGenreMt.find_by_sql(genre_sql)
+    item_genre_sql = 'SELECT * FROM item_genre_mts ORDER BY genre_id ASC, created_at DESC'
+    @item_genre = ItemGenreMt.includes(:item).find_by_sql(item_genre_sql)
   end
 
   def new
@@ -39,7 +43,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.includes(:item_genre_mt).includes(:tags).find(params[:id])
-    impressionist(@item) if @item.user_id != current_user.id # PVカウントアップ
+    impressionist(@item) if current_user.nil? || (@item.user_id != current_user.id) # PVカウントアップ
   end
 
   def select
