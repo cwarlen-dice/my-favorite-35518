@@ -1,11 +1,14 @@
 <%= render "shared/header" %>
-ジャンル未設定は設定できません<br />
-承認画像は最大５つまで選択できます<br />
-<%= form_with(model: @permit_image, url: create_user_permits_path(current_user.id), id: 'image-select', method: :post, local: true) do |f| %>
+<div class="px-3 ft-15">
+  ジャンル未設定は設定できません<br />
+  承認画像は最大５つまで選択できます<br />
+  <%= form_with(model: @permit_image, url: create_user_permits_path(current_user.id), id: 'image-select', method: :post, local: true) do |f| %>
 
-<%= render 'shared/error_messages', model: f.object %>
+  <%= render 'shared/error_messages', model: f.object %>
 
-<%= render partial: 'shared/permit_images', locals: {genres: @genres, item_genre: @item_genre, f: f} %>
+  <%= render partial: 'shared/permit_images', locals: {genres: @genres, item_genre: @item_genre, f: f} %>
 
-<%= f.submit "決定", id: 'image-select-sub' %>
-<% end %>
+  <%#= f.submit "決定", id: 'image-select-sub' %>
+  <%= link_to("決定", 'javascript:void(0);', id: 'image-select-sub', class: "btn btn-primary text-decoration-none text-white mt-1", onclick: "document.querySelector('#image-select').submit();") %>
+  <% end %>
+</div>
