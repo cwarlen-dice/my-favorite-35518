@@ -1,23 +1,25 @@
 <%= render "shared/header" %>
 
-<% unless @select_items.nil? %>
-<div class="select">
-  <% unless @genre.nil? %>
-  <%= 'ジャンル:' %>
-  <%= "#{@genre.data} 関連画像" %>
-  <% else %>
-  <%= 'タグ:' %>
-  <%= "#{@tag.name} 関連画像" %>
-  <% end %>
-</div>
-
-<div class="image-list">
-  <% @select_items.each do |f| %>
-  <div class="image">
-    <%= image_tag(f.item.image, class: "item-img") if f.item.image.attached? %>
+<div class="px-3 ft-15">
+  <% unless @select_items.nil? %>
+  <div class="select">
+    <% unless @genre.nil? %>
+    <%= 'ジャンル:' %>
+    <%= "#{@genre.data} 関連画像" %>
+    <% else %>
+    <%= 'タグ:' %>
+    <%= "#{@tag.name} 関連画像" %>
+    <% end %>
   </div>
+
+  <div class="image-list d-flex flex-wrap">
+    <% @select_items.each do |f| %>
+    <div class="image ms-1 mt-1">
+      <%= image_tag(f.item.image, class: "item-img") if f.item.image.attached? %>
+    </div>
+    <% end %>
+  </div>
+  <% else %>
+  <%= 'アイテムなし' %>
   <% end %>
 </div>
-<% else %>
-<%= 'アイテムなし' %>
-<% end %>
