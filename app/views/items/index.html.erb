@@ -1,11 +1,10 @@
 <%= render "shared/header" %>
 
 <div class="px-3 ft-15">
-  みんなの投稿<br />
-  ジャンル
-  <div class="select">
-    <%= collection_select(:genre, :id, Genre.all, :id, :data, { prompt: 'フィルターなし' }, {}) %>
-  </div>
+  最近のみんなの投稿 ジャンル別<br />
+  <%# <div class="select"> %>
+  <%#= collection_select(:genre, :id, Genre.all, :id, :data, { prompt: 'フィルターなし' }, {}) %>
+  <%# </div> %>
 
   <div class="image-genre">
     <% @genres.each do |genreMT| %>
@@ -17,16 +16,18 @@
         <% if item_genre.genre_id == genreMT.genre.id %>
         <% count += 1 %>
         <% break if count > 5 %>
+        <% if !current_user.nil? && item_genre.user_id == current_user.id %>
         <div class="image_tag p-1">
-          <% if !current_user.nil? && item_genre.user_id == current_user.id %>
           <%= link_to edit_user_item_path(item_genre.user_id, item_genre.item_id) do %>
           <%= image_tag(item_genre.item.image, class: "item-img ms-1") if item_genre.item.image.attached? %>
-          <% end %>
-          <% else %>
+        </div>
+        <% end %>
+        <% else %>
+        <div class="image_tag p-1">
           <%= link_to user_item_path(item_genre.user_id, item_genre.item_id) do %>
           <%= image_tag(item_genre.item.image, class: "item-img") if item_genre.item.image.attached? %>
-          <% end %>
         </div>
+        <% end %>
         <% end %>
         <% end %>
         <% end %>

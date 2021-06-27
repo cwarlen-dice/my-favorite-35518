@@ -1,27 +1,28 @@
 <%= render "shared/header" %>
 
-
-<div class="title">
-  <%= "タイトル：#{@item.name}" %>
-</div><br />
-<div class="genre">
-  <%= "ジャンル："%>
-  <%= link_to(@item.item_genre_mt.genre.data, selects_path(genre: @item.item_genre_mt.genre.data)) %>
-</div><br />
-<div class="tag-list">
-  <%= "タグ:" %><br />
-  <% @item.tags.each do |tag| %>
-  <div class="tag">
-    <%= link_to(tag.name, selects_path(tag: tag.name)) %>
+<div class="px-3 ft-15">
+  <div class="title">
+    <%= "タイトル：#{@item.name}" %>
   </div>
-  <% end %><br />
-</div>
-<div class="comment">
-  <%= "コメント：#{@item.comment}" %><br />
-</div>
-<div class="PV">
-  <%= "PV数：#{@item.impressions_count+1}"%><br />
-</div>
-<div class="image">
-  <%= image_tag(@item.image) %>
+  <div class="genre">
+    <%= "ジャンル："%>
+    <%= link_to(@item.item_genre_mt.genre.data, selects_path(genre: @item.item_genre_mt.genre.data)) %>
+  </div>
+  <div class="tag-list">
+    <%= "タグ:" %>
+    <% @item.tags.each do |tag| %>
+    <div class="tag">
+      <%= link_to(tag.name, selects_path(tag: tag.name)) %>
+    </div>
+    <% end %>
+  </div>
+  <div class="comment">
+    <%= "コメント：#{@item.comment}" %>
+  </div>
+  <div class="PV">
+    <%= "PV数：#{@item.impressions_count+1}"%>
+  </div>
+  <div class="image">
+    <%= image_tag(@item.image, class: "vh-100 vw-100") %>
+  </div>
 </div>

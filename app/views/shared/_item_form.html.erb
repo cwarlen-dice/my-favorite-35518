@@ -1,53 +1,60 @@
-<% if controller.action_name == 'new' || controller.action_name == 'create' %>
-<% url = user_items_path(current_user.id) %>
-<% else %>
-<% url = user_item_path(current_user.id) %>
-<% end %>
-<%= form_with(model: @item_options, url: url, local: true) do |f| %>
+<div class="vh-100 vw-100 d-flex justify-content-center mt-5 ft-15">
+  <% if controller.action_name == 'new' || controller.action_name == 'create' %>
+  <% url = user_items_path(current_user.id) %>
+  <% else %>
+  <% url = user_item_path(current_user.id) %>
+  <% end %>
 
-<%= render 'shared/error_messages', model: f.object %>
+  <%= form_with(model: @item_options, url: url, local: true, html: {class: "item-form ws-350"}) do |f| %>
 
-<%= f.label :image %><br />
-<%= f.file_field :image, accept: 'image/jpg,image/jpeg,image/png', name: 'item_options[image]' %><br />
-<%= f.label :画像タイトル %><br />
-(未入力の場合は、アップロードファイル名)<br />
-<%= f.text_field :name, name: 'item_options[name]' %><br />
-<%= f.label :コメント %><br />
-<%= f.text_area :comment, name: 'item_options[comment]' %><br />
+  <%= render 'shared/error_messages', model: f.object %>
 
-<% if controller.action_name == 'new' || controller.action_name == 'create' %>
-<%# newかcreateのみ表示 %>
-<%= f.label :タグ %><br />
-<%= f.text_field :tag_name, class: 'tags', name: 'item_options[tags][]', id: 'tag-input-now'%><br />
-<%= f.label :ジャンル %><br />
-<%= f.collection_select(:genre_id, Genre.all, :id, :data, {}, {class:"select-box", id:"item-genre", name: 'item_options[genre_id]'}) %><br />
-<%= f.submit "投稿" %>
-<% elsif controller.action_name == 'edit' %>
-<%# editのみ表示 %>
-<%= f.label :タグ %><br />
-<% f.object.tags.each do |tag| %>
-<div class="tag">
-  <%= f.text_field :tags, class: 'tag-element', name: 'item_options[tags][]', value: tag.name %>
-  <input value='✕' type='button' onclick='this.parentNode.remove()'>
-  <br />
+  <%= f.label :image %><br />
+  <%= f.file_field :image, accept: 'image/jpg,image/jpeg,image/png', name: 'item_options[image]' %><br />
+  <%= f.label :画像タイトル %><br />
+  (未入力の場合は、アップロードファイル名)<br />
+  <%= f.text_field :name, name: 'item_options[name]' %><br />
+  <%= f.label :コメント %><br />
+  <%= f.text_area :comment, name: 'item_options[comment]', class: "w-100" %><br />
+
+  <% if controller.action_name == 'new' || controller.action_name == 'create' %>
+  <%# newかcreateのみ表示 %>
+  <%= f.label :タグ %><br />
+  <%= f.text_field :tag_name, class: 'tags', name: 'item_options[tags][]', id: 'tag-input-now'%><br />
+  <%= f.label :ジャンル %><br />
+  <%= f.collection_select(:genre_id, Genre.all, :id, :data, {}, {class:"select-box", id:"item-genre", name: 'item_options[genre_id]'}) %><br />
+  <%#= f.submit "投稿" %>
+  <%= link_to("投稿", 'javascript:void(0);', class: "btn btn-primary text-decoration-none text-white mt-1", onclick: "document.querySelector('.item-form').submit();") %>
+
+  <% elsif controller.action_name == 'edit' %>
+  <%# editのみ表示 %>
+  <%= f.label :タグ %><br />
+  <% f.object.tags.each do |tag| %>
+  <div class="tag">
+    <%= f.text_field :tags, class: 'tag-element', name: 'item_options[tags][]', value: tag.name %>
+    <input value='✕' type='button' onclick='this.parentNode.remove()'>
+    <br />
+  </div>
+  <% end %>
+  <%= f.text_field :tag_name, class: 'tag-element', name: 'item_options[tags][]', id: 'tag-input-now'%><br />
+  <%= f.label :ジャンル %><br />
+  <%= f.collection_select(:genre_id, Genre.all, :id, :data, {selected: f.object.item_genre_mt.genre_id}, {class:"select-box", id:"item-genre", name: 'item_options[genre_id]'}) %><br />
+  <%#= f.submit "更新" %>
+  <%= link_to("更新", 'javascript:void(0);', class: "btn btn-primary text-decoration-none text-white mt-1", onclick: "document.querySelector('.item-form').submit();") %>
+  <% elsif controller.action_name == 'update' %>
+  <%# updateのみ表示 %>
+  <%= f.label :タグ %><br />
+  <% params[:item_options][:tags].each do |tag| %>
+  <div class="tag">
+    <%= f.text_field :tags, class: 'tag-element', name: 'item_options[tags][]', value: tag %>
+    <input value='✕' type='button' onclick='this.parentNode.remove()'>
+    <br />
+  </div>
+  <% end %>
+  <%= f.label :ジャンル %><br />
+  <%= f.collection_select(:genre_id, Genre.all, :id, :data, {selected: params[:item_options][:genre_id]}, {class:"select-box", id:"item-genre", name: 'item_options[genre_id]'}) %><br />
+  <%#= f.submit "更新" %>
+  <%= link_to("更新", 'javascript:void(0);', class: "btn btn-primary text-decoration-none text-white mt-1", onclick: "document.querySelector('.item-form').submit();") %>
+  <% end %>
+  <% end %>
 </div>
-<% end %>
-<%= f.text_field :tag_name, class: 'tag-element', name: 'item_options[tags][]', id: 'tag-input-now'%><br />
-<%= f.label :ジャンル %><br />
-<%= f.collection_select(:genre_id, Genre.all, :id, :data, {selected: f.object.item_genre_mt.genre_id}, {class:"select-box", id:"item-genre", name: 'item_options[genre_id]'}) %><br />
-<%= f.submit "更新" %>
-<% elsif controller.action_name == 'update' %>
-<%# updateのみ表示 %>
-<%= f.label :タグ %><br />
-<% params[:item_options][:tags].each do |tag| %>
-<div class="tag">
-  <%= f.text_field :tags, class: 'tag-element', name: 'item_options[tags][]', value: tag %>
-  <input value='✕' type='button' onclick='this.parentNode.remove()'>
-  <br />
-</div>
-<% end %>
-<%= f.label :ジャンル %><br />
-<%= f.collection_select(:genre_id, Genre.all, :id, :data, {selected: params[:item_options][:genre_id]}, {class:"select-box", id:"item-genre", name: 'item_options[genre_id]'}) %><br />
-<%= f.submit "更新" %>
-<% end %>
-<% end %>

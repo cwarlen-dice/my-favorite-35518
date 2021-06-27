@@ -57,6 +57,7 @@ window.addEventListener('load', function () {
 
       // 削除ボタンの生成
       const del_btn = document.createElement('input');
+      del_btn.setAttribute('class', 'ms-1');
       del_btn.type = 'button';
       del_btn.value = '✕';
       del_btn.setAttribute('onclick', `this.parentNode.remove()`);
