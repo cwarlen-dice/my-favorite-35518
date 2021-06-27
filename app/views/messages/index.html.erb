@@ -1,6 +1,6 @@
 <%= render "shared/header" %>
 
-<div class="d-flex flex-column ft-15 ww-400 mx-auto">
+<div class="d-flex flex-column ft-15 ww-400 mx-auto hmax-65">
   <%= form_with model: [@message], url: user_message_room_messages_path(current_user.id, @room.id), local: true, class: "form" do |f| %>
   <div class="form-input">
     <%= f.text_field :content, class: 'form-message', placeholder: 'type a message', class: "w-100" %>
@@ -12,9 +12,8 @@
   <%#= f.button '送信', type: 'button', class: 'form-submit', id: 'message-commit', onclick: 'submit()' %>
   <%= link_to('送信', 'javascript:void(0);', id: 'message-commit', class: "form-submit btn btn-primary text-decoration-none text-white mt-1", onclick: "document.querySelector('.form').submit();") %>
   <% end %>
-  <br />
 
-  <div class="message_list" id="messages">
+  <div class="message_list mt-1 p-1 h-100 border border-dark" id="messages">
     <% @messages.reverse_each do |message| %>
     <div class="message<%= " ms-right bg-info" if message.user.id != current_user.id %>">
       <div class="message-content">

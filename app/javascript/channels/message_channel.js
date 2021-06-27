@@ -12,7 +12,7 @@ consumer.subscriptions.create("MessageChannel", {
   received(data) {
     // メッセージ本文を表示するためのdiv要素を生成
     const messageComment = document.createElement('div');
-    messageComment.setAttribute('class', "message-comment");
+    messageComment.setAttribute('class', "message-comment text-break");
     const messageCommentHtml = data.content.content;
     messageComment.insertAdjacentHTML('afterbegin', messageCommentHtml);
 

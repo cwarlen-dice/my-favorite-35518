@@ -6,6 +6,10 @@
 
 /* 要素サイズ指定 */
 
+.hmax-65 {
+  height: calc(100vh - 65px);
+}
+
 .ww-400 {
   width: calc(100% - 400px);
 }
