@@ -1,15 +1,17 @@
 <%= render "shared/header" %>
 
-メッセージ相手リスト
-<div class="menber-list">
-  <% @rooms.each do |rmt| %>
-  <% rmt.room.users.each do |u| %>
-  <% if current_user.id != u.id %>
-  <div class="menber">
-    <%= link_to('✕', user_message_room_path(current_user.id, rmt.room_id), class: "user-del") %>
-    <%= link_to(u.nickname, user_message_room_messages_path(current_user.id, rmt.room_id)) %>
+<div class="container ft-15">
+  メッセージ相手リスト
+  <div class="menber-list">
+    <% @rooms.each do |rmt| %>
+    <% rmt.room.users.each do |u| %>
+    <% if current_user.id != u.id %>
+    <div class="menber">
+      <%= link_to('✕', user_message_room_path(current_user.id, rmt.room_id), class: "user-del bg-danger text-white text-decoration-none p-1") %>
+      <%= link_to(u.nickname, user_message_room_messages_path(current_user.id, rmt.room_id), class: "ft-20") %>
+    </div>
+    <% end %>
+    <% end %>
+    <% end %>
   </div>
-  <% end %>
-  <% end %>
-  <% end %>
 </div>
