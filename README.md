@@ -14,6 +14,7 @@ my-favorite-35518
 ## 本番環境
 
 https://my-favorite-35518.herokuapp.com/
+
 ID:admin
 Password:Rqe2tUDnUnuK
 
@@ -38,11 +39,11 @@ Password:Rqe2tUDnUnuK
 
 ## 開発環境
 
-Rails 6.0.3.7
-ruby 2.6.5p114
-mysql 5.6.50
-heroku 7.54.1
-git version 2.30.1
+- Rails 6.0.3.7
+- ruby 2.6.5p114
+- mysql 5.6.50
+- heroku 7.54.1
+- git version 2.30.1
 
 ## 課題や今後実装したい機能
 
