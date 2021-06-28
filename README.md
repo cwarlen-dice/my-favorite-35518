@@ -1,24 +1,55 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## アプリ名
 
-Things you may want to cover:
+my-favorite-35518
 
-* Ruby version
+## 概要
 
-* System dependencies
+このアプリケーションは、登録ユーザーによる画像の投稿ができます。非登録の場合は、閲覧のみ可能です。
+登録ユーザーは、承認画像設定を行うことができます。
+承認画像設定を行うことで、メッセージ機能を有効化することができるようになります。相手にメッセージを送りたい場合、相手側も承認画像設定を完了させている必要があります。
+初めての相手にメッセージを送る場合、相手の設定した承認画像を選択し、正しい画像を選択する必要があります。正しい画像が選択できなかった場合には、メッセージを送ることはできません。
 
-* Configuration
+## 本番環境
 
-* Database creation
+https://my-favorite-35518.herokuapp.com/
+ID:admin
+Password:Rqe2tUDnUnuK
 
-* Database initialization
+## 制作背景
 
-* How to run the test suite
+通常の投稿サイトでは、自分以外のユーザーの声を聞ける反面、過度な反応によるストレスにもなると感じました。
+そのため、ユーザー同士のコミュニケーション機能をあえて最低限にして、できるだけストレスを感じない投稿サイトを作って見ようと思いました。
 
-* Services (job queues, cache servers, search engines, etc.)
+## 工夫したポイント
 
-* Deployment instructions
+### 画像承認機能の実装
 
-* ...
+コミュニケーション手段に承認機能を設けました。
+この機能を設けることで、２つの効果を狙いました。
+
+1. 迷惑行為を低減させる
+   メッセージを送るために手間が必要となるため
+2. 受け手側のストレスを緩和させる
+   自分の好みを理解できたユーザーからのみメッセージを受け付けるため
+
+#### 実装にあたってのポイント
+
+1. 正解の画像の表示位置をランダム表示させる。
+2. ダミー画像のidをランダムで採番して、他ユーザーと比較してダミーの特定を防止。
+
+## 開発環境
+
+Rails 6.0.3.7
+ruby 2.6.5p114
+mysql 5.6.50
+heroku 7.54.1
+git version 2.30.1
+
+## 課題や今後実装したい機能
+
+現在の画像承認画面では、検証ツールを開くと、urlからダミーを判別できてしまう。
+セキュリティの観点からurlでの判別をできない様にしたい。
+
+## DB設計

@@ -115,5 +115,6 @@ class PermitsController < ApplicationController
       smple_img.shuffle!
       @smple_imgs[i] = [@images[i].item.item_genre_mt.genre_id, smple_img]
     end
+    @smple_imgs.shuffle!
   end
 end
