@@ -24,20 +24,17 @@ Password:Rqe2tUDnUnuK
 
 ## 工夫したポイント
 
-### 画像承認機能の実装
+1. 画像承認機能の実装
+   コミュニケーション手段に承認機能を設けました。
+   この機能を設けることで、２つの効果を狙いました。
+   1. 迷惑行為を低減させる
+      メッセージを送るために手間が必要となるため
+   2. 受け手側のストレスを緩和させる
+      自分の好みを理解できたユーザーからのみメッセージを受け付けるため
 
-コミュニケーション手段に承認機能を設けました。
-この機能を設けることで、２つの効果を狙いました。
-
-1. 迷惑行為を低減させる
-   メッセージを送るために手間が必要となるため
-2. 受け手側のストレスを緩和させる
-   自分の好みを理解できたユーザーからのみメッセージを受け付けるため
-
-#### 実装にあたってのポイント
-
-1. 正解の画像の表示位置をランダム表示させる。
-2. ダミー画像のidをランダムで採番して、他ユーザーと比較してダミーの特定を防止。
+2. 実装にあたってのポイント
+   1. 正解の画像の表示位置をランダム表示させる。
+   2. ダミー画像のidをランダムで採番して、他ユーザーと比較してダミーの特定を防止。
 
 ## 開発環境
 
@@ -52,4 +49,133 @@ git version 2.30.1
 現在の画像承認画面では、検証ツールを開くと、urlからダミーを判別できてしまう。
 セキュリティの観点からurlでの判別をできない様にしたい。
 
+いいね機能を実装を実装したい。
+
 ## DB設計
+
+### usersテーブル
+
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| email              | string  | default: ''               |
+| encrypted_password | string  | null: false               |
+| nickname           | string  | null: false, unique: true |
+| birthday           | date    |                           |
+| blood_type_id      | integer |                           |
+| profile            | text    |                           |
+| impressions_count  | integer | default: 0                |
+
+#### Association
+
+- has_one_attached :image
+- has_many :items
+- has_many :permit_images
+- has_many :room_users
+- has_many :rooms, through: :room_users
+- has_many :messages
+
+### itemsテーブル
+
+| Column            | Type       | Options                        |
+| ----------------- | ---------- | ------------------------------ |
+| user              | references | null: false, foreign_key: true |
+| name              | string     |                                |
+| comment           | text       |                                |
+| impressions_count | integer    | default: 0                     |
+
+#### Association
+
+- has_one_attached :image, dependent: :destroy
+- belongs_to :user
+- has_one :permit_image
+- has_many :item_tag_mts, dependent: :destroy
+- has_many :tags, through: :item_tag_mts
+- has_one :item_genre_mt, dependent: :destroy
+- has_one :genre, through: :item_genre_mt
+
+### item_genre_mtsテーブル
+
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| item   | references | null: false, foreign_key: true |
+| user   | references | null: false, foreign_key: true |
+| genre  | references | null: false                    |
+
+
+#### Association
+
+- belongs_to :item
+- belongs_to :tag
+
+### tagsテーブル
+
+| Column | Type   | Options                   |
+| ------ | ------ | ------------------------- |
+| name   | string | null: false, unique: true |
+
+#### Association
+
+- has_many :item_tag_mts, dependent: :destroy
+- has_many :items, through: :item_tag_mts
+
+
+### item_tag_mtsテーブル
+
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| item   | references | null: false, foreign_key: true |
+| tag    | references | null: false, foreign_key: true |
+
+#### Association
+
+- belongs_to :item
+- belongs_to :tag
+
+### roomsテーブル
+
+idのみ追加カラムなし
+
+#### Association
+
+- has_many :room_users, dependent: :destroy
+- has_many :users, through: :room_users
+- has_many :messages, dependent: :destroy
+
+### room_usersテーブル
+
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| room   | references | null: false, foreign_key: true |
+
+#### Association
+
+- belongs_to :user
+- belongs_to :room
+
+
+### messagesテーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| content | string     |                                |
+| user    | references | null: false, foreign_key: true |
+| room    | references | null: false, foreign_key: true |
+
+#### Association
+
+- belongs_to :room
+- belongs_to :user
+- has_one_attached :image
+
+### permit_imagesテーブル
+
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| item   | references | null: false, foreign_key: true |
+| room   | references | null: false, foreign_key: true |
+
+#### Association
+
+- belongs_to :user
+- belongs_to :item
