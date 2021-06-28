@@ -10,7 +10,10 @@
     <% @genres.each do |genreMT| %>
     <% count = 0 %>
     <div class="item-genre" id="item-genre-<%= genreMT.genre.id %>" style="display: block;">
-      <div class="genre"><%= genreMT.genre.data %></div>
+      <div class="genre">
+        <%#= genreMT.genre.data %>
+        <%= link_to(genreMT.genre.data, selects_path(genre: genreMT.genre.data)) %>
+      </div>
       <div class="genre-images d-flex">
         <% @item_genre.each do |item_genre| %>
         <% if item_genre.genre_id == genreMT.genre.id %>
