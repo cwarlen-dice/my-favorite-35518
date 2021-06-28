@@ -27,9 +27,10 @@
   <div class="images">
     投稿一覧<br />
     ジャンル
-    <%= form_with(url: '#', local: false) do |f| %>
-    <%= f.collection_select(:genre_id, Genre.all, :id, :data, { prompt: 'フィルターなし' }, { class: "select-box-genre-sort", id: "item-genre-sort", onchange: "this.id = \"item-genre-sort-\"+this.value"}) %>
-    <% end %>
+    <div class="select">
+      <%= collection_select(:genre, :id, Genre.all, :id, :data, { prompt: 'フィルターなし' }, { class: "select-box-genre-sort", id: "item-genre-sort", onchange: "this.id = \"item-genre-sort-\"+this.value"}) %>
+    </div>
+
     <div class="image-genre">
       <% @genres.each do |genreMT| %>
       <div class="item-genre" id="item-genre-<%= genreMT.genre.id %>" style="display: block;">
