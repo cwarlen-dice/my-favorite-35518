@@ -8,7 +8,7 @@ window.addEventListener('load', function () {
       if (elem.style.display == "block") {
         // noneで非表示
         this.innerText = "プロフィール表示[+]";
-        elem.style.display = "none";
+        elem.setAttribute('style', 'display: none!important;');
       } else {
         // blockで表示
         this.innerText = "プロフィール表示[-]";
