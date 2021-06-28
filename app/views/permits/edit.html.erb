@@ -8,7 +8,6 @@
 
   <%= render partial: 'shared/permit_images', locals: {genres: @genres, item_genre: @item_genre, f: f} %>
 
-  <%#= f.submit "更新", id: 'image-select-sub' %>
   <%= link_to("更新", 'javascript:void(0);', id: 'image-select-sub', class: "btn btn-primary text-decoration-none text-white mt-1", onclick: "document.querySelector('#image-select').submit();") %>
   <% end %>
 </div>

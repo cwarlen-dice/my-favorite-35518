@@ -23,7 +23,6 @@
   <%= f.text_field :tag_name, class: 'tags', name: 'item_options[tags][]', id: 'tag-input-now'%><br />
   <%= f.label :ジャンル %><br />
   <%= f.collection_select(:genre_id, Genre.all, :id, :data, {}, {class:"select-box", id:"item-genre", name: 'item_options[genre_id]'}) %><br />
-  <%#= f.submit "投稿" %>
   <%= link_to("投稿", 'javascript:void(0);', class: "btn btn-primary text-decoration-none text-white mt-1", onclick: "document.querySelector('.item-form').submit();") %>
 
   <% elsif controller.action_name == 'edit' %>
@@ -39,7 +38,6 @@
   <%= f.text_field :tag_name, class: 'tag-element', name: 'item_options[tags][]', id: 'tag-input-now'%><br />
   <%= f.label :ジャンル %><br />
   <%= f.collection_select(:genre_id, Genre.all, :id, :data, {selected: f.object.item_genre_mt.genre_id}, {class:"select-box", id:"item-genre", name: 'item_options[genre_id]'}) %><br />
-  <%#= f.submit "更新" %>
   <%= link_to("更新", 'javascript:void(0);', class: "btn btn-primary text-decoration-none text-white mt-1", onclick: "document.querySelector('.item-form').submit();") %>
   <% elsif controller.action_name == 'update' %>
   <%# updateのみ表示 %>
@@ -53,7 +51,6 @@
   <% end %>
   <%= f.label :ジャンル %><br />
   <%= f.collection_select(:genre_id, Genre.all, :id, :data, {selected: params[:item_options][:genre_id]}, {class:"select-box", id:"item-genre", name: 'item_options[genre_id]'}) %><br />
-  <%#= f.submit "更新" %>
   <%= link_to("更新", 'javascript:void(0);', class: "btn btn-primary text-decoration-none text-white mt-1", onclick: "document.querySelector('.item-form').submit();") %>
   <% end %>
   <% end %>
