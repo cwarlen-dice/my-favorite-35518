@@ -1,28 +1,29 @@
 <%= render "shared/header" %>
 
-<%= form_with(url: check_user_permits_path(@user.id), method: :post, local: true) do |f| %>
-
-<div class="permit-images">
-  <% @smple_imgs.each_with_index do |item, num| %>
-  <div class="permit-checkbox-<%= num %>">
-    <% sample_num = 1  %>
-    <% item[1].each do |id| %>
-    <div class="checkbox-image">
-      <label>
-        <% if id.is_a?(Integer) %>
-        <%= f.check_box :ids, {multiple: true, name: 'check_ids[]', class: 'image-check-box'}, id, false %>
-        <%= image_tag asset_path("genre/#{item[0]}/#{sample_num}"), class: "parmit-image" %>
-        <% sample_num += 1 %>
-        <% else %>
-        <%= f.check_box :ids, {multiple: true, name: 'check_ids[]', class: 'image-check-box'}, id.item_id, false %>
-        <%= image_tag(id.item.image, class: "parmit-image") %>
-        <% end %>
-      </label>
+<div class="d-flex justify-content-center mt-5 ft-15">
+  <%= form_with(url: check_user_permits_path(@user.id), method: :post, local: true, html: {class: "check-form"}) do |f| %>
+  <div class="permit-images">
+    <% @smple_imgs.each_with_index do |item, num| %>
+    <div class="permit-checkbox-<%= num %>">
+      <% sample_num = 1  %>
+      <% item[1].each do |id| %>
+      <div class="checkbox-image">
+        <label>
+          <% if id.is_a?(Integer) %>
+          <%= f.check_box :ids, {multiple: true, name: 'check_ids[]', class: 'image-check-box'}, id, false %>
+          <%= image_tag asset_path("genre/#{item[0]}/#{sample_num}"), class: "parmit-image" %>
+          <% sample_num += 1 %>
+          <% else %>
+          <%= f.check_box :ids, {multiple: true, name: 'check_ids[]', class: 'image-check-box'}, id.item_id, false %>
+          <%= image_tag(id.item.image, class: "parmit-image") %>
+          <% end %>
+        </label>
+      </div>
+      <% end %>
     </div>
     <% end %>
   </div>
+  <br />
+  <%= link_to("check", 'javascript:void(0);', class: "btn btn-primary text-decoration-none text-white mt-1", onclick: "document.querySelector('.check-form').submit();") %>
   <% end %>
 </div>
-<br />
-<%= f.submit "submit" %>
-<% end %>
