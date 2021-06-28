@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def update
     @user.blood_type_id = nil unless @user.blood_type_id.nil? || !@user.blood_type_id.zero?
+    @user.image = nil if params[:image].nil?
     if @user.update(user_params)
       redirect_to(user_path(params[:id]))
     else

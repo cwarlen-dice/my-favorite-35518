@@ -2,17 +2,24 @@
 
 <div class="container ft-15">
   <%= link_to('プロフィール表示[+]', 'javascript:void(0);', { id: "edit-btn" }) %>
-  <div class="border border-dark m-1 p-1" id="profile" style="display: none;">
+  <div class="border border-dark m-1 p-1<%= ' d-flex' if @user.image.attached? %>" id="profile" style="display: none;">
     <% if user_signed_in? && current_user.id == @user.id %>
-    <%= link_to(:編集, edit_user_path(@user.id))  %><br />
+    <% if @user.image.attached? %>
+    <div class="me-2 d-flex flex-column">
+      <div class="mx-auto">プロフィール画像</div>
+      <div class="mx-auto"><%= image_tag @user.image, class: "profile-img" %></div>
+    </div>
     <% end %>
-    <%= "誕生日：#{@user.birthday}" %><br />
-    血液型：
-    <%= @user.blood_type.data unless @user.blood_type.blank? || @user.blood_type_id.zero? %>
-    <br />
-    <%= "プロフィール：#{@user.profile}" %><br />
-    プロフィール画像：<br />
-    <%= image_tag @user.image, class: "profile-img" if @user.image.attached? %>
+    <div class="profile-column">
+      <%= link_to(:編集, edit_user_path(@user.id))  %><br />
+      <% end %>
+      <%= "誕生日：#{@user.birthday}" %><br />
+      血液型：
+      <%= @user.blood_type.data unless @user.blood_type.blank? || @user.blood_type_id.zero? %>
+      <br />
+      <%= "プロフィール：#{@user.profile}" %><br />
+    </div>
+
   </div>
 
   <% if user_signed_in? && current_user.id == @user.id %>
