@@ -15,11 +15,11 @@ my-favorite-35518
 
 https://my-favorite-35518.herokuapp.com/
 
-ID:test
-Password:aaq111
+- ID:test
+- Password:aaq111
 
-ID:test2
-Password:aaq111
+- ID:test2
+- Password:aaq111
 
 ## 制作背景
 
