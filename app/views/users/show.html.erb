@@ -52,7 +52,7 @@
           </div>
           <% else %>
           <%= link_to user_item_path(item_genre.user_id, item_genre.item_id) do %>
-          <div class="image_tag">
+          <div class="image_tag p-1">
             <%= image_tag(item_genre.item.image, class: "item-img") if item_genre.item.image.attached? %>
           </div>
           <% end %>

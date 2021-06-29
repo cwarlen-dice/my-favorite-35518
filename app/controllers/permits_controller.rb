@@ -51,7 +51,7 @@ class PermitsController < ApplicationController
   def check
     get_images(params[:user_id])
     check_ids = params[:check_ids].map(&:to_i)
-    if check_ids == @ids
+    if check_ids.sort == @ids.sort
       redirect_to(create_user_message_rooms_path(params[:user_id]))
     else
       render :permit_select
