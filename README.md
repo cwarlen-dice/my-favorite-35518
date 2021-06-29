@@ -11,11 +11,11 @@ my-favorite-35518
 承認画像設定を行うことで、メッセージ機能を有効化することができるようになります。相手にメッセージを送りたい場合、相手側も承認画像設定を完了させている必要があります。<br>
 初めての相手にメッセージを送る場合、相手の設定した承認画像を選択し、正しい画像を選択する必要があります。正しい画像が選択できなかった場合には、メッセージを送ることはできません。
 
-承認成功
-![承認成功](https://user-images.githubusercontent.com/82791776/123754985-6e5bda80-d8f6-11eb-9218-8f1ec8f09217.gif)
-
 承認失敗
-![承認失敗](https://user-images.githubusercontent.com/82791776/123755315-bb3fb100-d8f6-11eb-8a2f-fdf6e615f423.gif)
+![承認失敗](https://user-images.githubusercontent.com/82791776/123759228-abc26700-d8fa-11eb-94c7-1c530bfc4e51.gif)
+
+承認成功
+![承認成功](https://user-images.githubusercontent.com/82791776/123759312-bda40a00-d8fa-11eb-9256-a2ebdeab9956.gif)
 
 ## 本番環境
 
